@@ -122,3 +122,12 @@ div[class*="powered"] {
   -webkit-mask-size: 100% 100%;
   mask-size: 100% 100%;
 }
+
+/* Mobile Overflow Fix */
+html, body {
+  overflow-x: hidden;
+}
+
+#root {
+  overflow-x: hidden;
+}

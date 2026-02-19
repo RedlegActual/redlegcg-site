@@ -65,9 +65,9 @@ const Brands: React.FC = () => {
           Built with the tools that power modern business
         </p>
 
-        <div className="relative marquee-mask overflow-x-hidden overflow-y-visible py-2 -my-2">
+        <div className="relative marquee-mask overflow-hidden w-full max-w-full py-2 -my-2">
           {/* Scrolling Track */}
-          <div className="flex w-max animate-marquee" style={{ willChange: 'transform' }}>
+          <div className="flex w-max animate-marquee" style={{ willChange: 'transform', transform: 'translateZ(0)' }}>
             {duplicatedBrands.map((brand, i) => (
               <div
                 key={`${brand.id}-${i}`}

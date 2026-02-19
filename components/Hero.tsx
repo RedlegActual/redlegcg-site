@@ -107,8 +107,9 @@ const Hero: React.FC = () => {
       {/* Layer 1: Base Background (handled by bg-black on section) */}
 
       {/* Layer 2: Subtle Technical Grid */}
+      {/* Layer 2: Subtle Technical Grid */}
       <div
-        className="absolute inset-0 z-0 opacity-10 pointer-events-none"
+        className="absolute inset-0 z-0 opacity-10 pointer-events-none overflow-hidden"
         style={{
           backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
           backgroundSize: '40px 40px'
@@ -146,9 +147,9 @@ const Hero: React.FC = () => {
       {/* Headlines */}
       <div className="text-center max-w-5xl px-4 md:px-6 relative z-10 transition-all duration-1000 w-full flex flex-col items-center mx-auto">
 
-        <h1 className="text-[clamp(2.1rem,7.2vw,4.5rem)] md:text-7xl font-bold tracking-tight mb-6 md:mb-8 opacity-0 animate-[fadeInUp_1s_ease-out_0.2s_forwards] leading-[1.1] md:leading-[1.1] px-2 text-center mx-auto [text-wrap:balance]">
-          <span className="text-white inline">Websites Built With Precision.</span>{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-red-300 to-red-500 animate-gradient-x inline">Designed For Growth.</span>
+        <h1 className="text-[clamp(1.7rem,6.8vw,4.5rem)] xs:text-[clamp(2.1rem,7.2vw,4.5rem)] md:text-7xl font-bold tracking-tight mb-6 md:mb-8 opacity-0 animate-[fadeInUp_1s_ease-out_0.2s_forwards] leading-[1.1] md:leading-[1.1] px-2 text-center mx-auto [text-wrap:balance]">
+          <span className="text-white block whitespace-nowrap">Websites Built With Precision.</span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-red-300 to-red-500 animate-gradient-x block">Designed For Growth.</span>
         </h1>
 
         <p className="text-gray-400 text-base md:text-xl leading-relaxed max-w-2xl mx-auto mb-8 md:mb-12 opacity-0 animate-[fadeInUp_1s_ease-out_0.4s_forwards] font-light px-4 text-center">
