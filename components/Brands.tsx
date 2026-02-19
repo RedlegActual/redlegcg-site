@@ -59,7 +59,7 @@ const Brands: React.FC = () => {
   if (brands.length === 0) return null;
 
   return (
-    <section className="py-24 bg-black overflow-hidden relative">
+    <section className="py-10 md:py-24 bg-black overflow-hidden relative">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <p className="text-center text-gray-500 text-xs font-semibold uppercase tracking-[0.2em] mb-12">
           Built with the tools that power modern business

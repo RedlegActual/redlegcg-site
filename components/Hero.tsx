@@ -262,10 +262,10 @@ const Hero: React.FC = () => {
         {/* CTA Button */}
         <div className="opacity-0 animate-[fadeInUp_1s_ease-out_0.6s_forwards] relative group mt-4 md:mt-8 inline-flex justify-center items-center pb-8 md:pb-0">
           {/* Animated Glow Ring */}
-          <div className="absolute -inset-1 bg-gradient-to-r from-red-500 via-red-800 to-red-500 rounded-xl blur-sm md:blur opacity-40 md:opacity-60 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
+          <div className="absolute -inset-1 bg-gradient-to-r from-red-500 via-red-800 to-red-500 rounded-xl blur-[2px] md:blur opacity-30 md:opacity-60 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
 
           {/* Cosmic red glow behind button */}
-          <div className="absolute inset-0 z-0 pointer-events-none transition-opacity duration-500 group-hover:opacity-100 opacity-40 md:opacity-60 rounded-xl overflow-hidden">
+          <div className="absolute inset-0 z-0 pointer-events-none transition-opacity duration-500 group-hover:opacity-100 opacity-30 md:opacity-60 rounded-xl overflow-hidden">
             <div className="absolute inset-0 animate-[cosmicShift_14s_ease-in-out_infinite]"
               style={{
                 background: 'radial-gradient(circle at 50% 50%, rgba(185, 28, 28, 0.4) 0%, transparent 60%)',
@@ -275,7 +275,7 @@ const Hero: React.FC = () => {
 
           <button
             onClick={() => document.getElementById('booking-section')?.scrollIntoView({ behavior: 'smooth' })}
-            className="relative z-10 flex items-center gap-2 bg-white text-black px-8 py-3.5 text-base font-bold hover:bg-gray-100 transition-all rounded-xl cursor-pointer hover:shadow-[0_0_10px_rgba(255,255,255,0.4)] md:hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] hover:scale-[1.02] active:scale-[0.98] group/btn"
+            className="relative z-10 flex items-center gap-2 bg-white text-black px-6 py-3 md:px-8 md:py-3.5 text-base font-bold hover:bg-gray-100 transition-all rounded-xl cursor-pointer hover:shadow-[0_0_10px_rgba(255,255,255,0.2)] md:hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] hover:scale-[1.02] active:scale-[0.98] group/btn"
           >
             Let’s Build
           </button>
