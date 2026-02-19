@@ -177,14 +177,14 @@ const Hero: React.FC = () => {
             </div>
 
             {/* Dashboard Content */}
-            <div className="flex-1 p-4 md:p-6 flex gap-6 relative">
+            <div className="flex-1 p-4 md:p-6 flex flex-col md:flex-row gap-4 md:gap-6 relative">
               {/* Background Grid */}
               <div className="absolute inset-0 opacity-10 pointer-events-none"
                 style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)', backgroundSize: '30px 30px' }}
               />
 
               {/* Left Column: Founder Block */}
-              <div className="hidden md:flex flex-col gap-4 w-56 z-10">
+              <div className="grid grid-cols-2 md:flex md:flex-col gap-3 md:gap-4 w-full md:w-56 z-10 shrink-0">
                 {/* Profile Card */}
                 <div className="bg-white/5 rounded-2xl p-3 border border-white/10 flex items-center gap-3 hover:bg-white/10 transition-colors">
                   <div className="w-10 h-10 rounded-full bg-red-900/20 flex items-center justify-center border border-red-500/20 overflow-hidden flex-shrink-0">
@@ -265,7 +265,7 @@ const Hero: React.FC = () => {
           <div className="absolute -inset-1 bg-gradient-to-r from-red-500 via-red-800 to-red-500 rounded-xl blur-[2px] md:blur opacity-30 md:opacity-60 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
 
           {/* Cosmic red glow behind button */}
-          <div className="absolute inset-0 z-0 pointer-events-none transition-opacity duration-500 group-hover:opacity-100 opacity-30 md:opacity-60 rounded-xl overflow-hidden">
+          <div className="absolute inset-0 z-0 pointer-events-none transition-opacity duration-500 group-hover:opacity-100 hidden md:block opacity-30 md:opacity-60 rounded-xl overflow-hidden">
             <div className="absolute inset-0 animate-[cosmicShift_14s_ease-in-out_infinite]"
               style={{
                 background: 'radial-gradient(circle at 50% 50%, rgba(185, 28, 28, 0.4) 0%, transparent 60%)',
