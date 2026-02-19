@@ -156,7 +156,7 @@ const Hero: React.FC = () => {
         </p>
 
         {/* Hero Dashboard Graphic (Reduced Size) */}
-        <div className="relative z-10 w-full max-w-3xl mx-auto mb-8 md:mb-0 opacity-0 animate-[fadeInUp_1s_ease-out_0.5s_forwards] scale-[0.85] md:scale-90 origin-top">
+        <div className="relative z-10 w-full max-w-[95vw] mx-auto mb-8 md:mb-0 opacity-0 animate-[fadeInUp_1s_ease-out_0.5s_forwards] scale-[0.6] sm:scale-[0.75] md:scale-90 origin-top -mb-24 sm:-mb-16 md:mb-0">
           <div className="absolute inset-0 bg-red-900/10 blur-[80px] rounded-full" />
 
           {/* Main Dashboard Glass Panel */}
@@ -177,14 +177,14 @@ const Hero: React.FC = () => {
             </div>
 
             {/* Dashboard Content */}
-            <div className="flex-1 p-4 md:p-6 flex flex-col md:flex-row gap-4 md:gap-6 relative">
+            <div className="flex-1 p-4 md:p-6 flex flex-row gap-4 md:gap-6 relative">
               {/* Background Grid */}
               <div className="absolute inset-0 opacity-10 pointer-events-none"
                 style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)', backgroundSize: '30px 30px' }}
               />
 
               {/* Left Column: Founder Block */}
-              <div className="grid grid-cols-2 md:flex md:flex-col gap-3 md:gap-4 w-full md:w-56 z-10 shrink-0">
+              <div className="flex flex-col gap-3 md:gap-4 w-48 md:w-56 z-10 shrink-0">
                 {/* Profile Card */}
                 <div className="bg-white/5 rounded-2xl p-3 border border-white/10 flex items-center gap-3 hover:bg-white/10 transition-colors">
                   <div className="w-10 h-10 rounded-full bg-red-900/20 flex items-center justify-center border border-red-500/20 overflow-hidden flex-shrink-0">
