@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import SEO from './SEO';
@@ -45,15 +46,15 @@ const BlogPage: React.FC = () => {
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'Blog',
-    name: 'Scale With Teddy Blog',
-    description: 'Expert insights on LinkedIn growth, B2B lead generation, and scaling your consulting business.',
+    name: 'Redleg Consulting Group Blog',
+    description: 'Expert insights on infrastructure, systems architecture, and scaling your consulting business.',
     url: typeof window !== 'undefined' ? window.location.href : '',
     publisher: {
       '@type': 'Organization',
-      name: 'Scale With Teddy',
+      name: 'Redleg Consulting Group',
       logo: {
         '@type': 'ImageObject',
-        url: '/Logo/1.png'
+        url: '/assets/redleg-logo-main.png'
       }
     },
     blogPost: filteredArticles.map(article => ({
@@ -73,7 +74,7 @@ const BlogPage: React.FC = () => {
     <>
       <SEO
         title="Blog"
-        description="Expert insights on LinkedIn growth, B2B lead generation, and scaling your consulting business past $50k/month."
+        description="Expert insights on infrastructure, systems architecture, and scaling your consulting business."
         structuredData={structuredData}
       />
 
@@ -96,10 +97,10 @@ const BlogPage: React.FC = () => {
           <div className="max-w-7xl mx-auto relative z-10">
             <div className="text-center max-w-3xl mx-auto mb-12">
               <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-                Insights & <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Strategies</span>
+                Insights & <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-400">Strategies</span>
               </h1>
               <p className="text-xl text-gray-400">
-                Expert insights on LinkedIn growth, B2B lead generation, and scaling your consulting business past $50k/month.
+                Expert insights on infrastructure, systems architecture, and scaling your consulting business past $50k/month.
               </p>
             </div>
 
@@ -111,7 +112,7 @@ const BlogPage: React.FC = () => {
                   placeholder="Search articles..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-400 transition-colors"
+                  className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-red-500 transition-colors"
                 />
                 <svg
                   className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
@@ -128,11 +129,10 @@ const BlogPage: React.FC = () => {
             <div className="flex flex-wrap items-center justify-center gap-3 mb-16">
               <button
                 onClick={() => { setSelectedCategory(null); setSelectedTag(null); }}
-                className={`px-6 py-2 rounded-full transition-all ${
-                  !selectedCategory && !selectedTag
-                    ? 'bg-blue-500/20 border-blue-500/50 text-blue-400'
+                className={`px-6 py-2 rounded-full transition-all ${!selectedCategory && !selectedTag
+                    ? 'bg-red-500/20 border-red-500/50 text-red-400'
                     : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'
-                } border`}
+                  } border`}
               >
                 All Articles
               </button>
@@ -140,11 +140,10 @@ const BlogPage: React.FC = () => {
                 <button
                   key={category}
                   onClick={() => { setSelectedCategory(category); setSelectedTag(null); }}
-                  className={`px-6 py-2 rounded-full transition-all ${
-                    selectedCategory === category
-                      ? 'bg-blue-500/20 border-blue-500/50 text-blue-400'
+                  className={`px-6 py-2 rounded-full transition-all ${selectedCategory === category
+                      ? 'bg-red-500/20 border-red-500/50 text-red-400'
                       : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'
-                  } border`}
+                    } border`}
                 >
                   {category}
                 </button>
@@ -153,7 +152,7 @@ const BlogPage: React.FC = () => {
           </div>
 
           {/* Background Glow */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-4xl bg-blue-500/5 blur-[100px] pointer-events-none" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-4xl bg-red-900/10 blur-[100px] pointer-events-none" />
         </section>
 
         {/* Articles Grid */}
@@ -174,12 +173,12 @@ const BlogPage: React.FC = () => {
                     <div className="grid md:grid-cols-2 gap-0">
                       <div className="p-8 md:p-12 flex flex-col justify-center">
                         <div className="flex items-center gap-3 mb-4">
-                          <span className="px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-sm font-medium">
+                          <span className="px-3 py-1 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-sm font-medium">
                             {featuredArticle.category}
                           </span>
                           <span className="text-gray-500 text-sm">Featured</span>
                         </div>
-                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors">
+                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 group-hover:text-red-400 transition-colors">
                           {featuredArticle.title}
                         </h2>
                         <p className="text-gray-400 text-lg mb-6 leading-relaxed">
@@ -223,10 +222,10 @@ const BlogPage: React.FC = () => {
                           </div>
                         )}
                         <div className="p-6 flex-1 flex flex-col">
-                          <span className="text-xs text-blue-400 font-medium mb-3">
+                          <span className="text-xs text-red-400 font-medium mb-3">
                             {article.category}
                           </span>
-                          <h3 className="text-white font-bold text-xl mb-2 group-hover:text-blue-400 transition-colors">
+                          <h3 className="text-white font-bold text-xl mb-2 group-hover:text-red-400 transition-colors">
                             {article.title}
                           </h3>
                           <p className="text-gray-400 text-sm mb-4 flex-1">
@@ -257,11 +256,10 @@ const BlogPage: React.FC = () => {
                   <button
                     key={tag}
                     onClick={() => { setSelectedTag(tag); setSelectedCategory(null); }}
-                    className={`px-4 py-2 rounded-full text-sm transition-all ${
-                      selectedTag === tag
-                        ? 'bg-purple-500/20 border-purple-500/50 text-purple-400'
+                    className={`px-4 py-2 rounded-full text-sm transition-all ${selectedTag === tag
+                        ? 'bg-red-900/20 border-red-500/50 text-red-400'
                         : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'
-                    } border`}
+                      } border`}
                   >
                     {tag}
                   </button>

@@ -1,80 +1,88 @@
-
 import React from 'react';
 
+// Core & Tools (v2 Strict Imports)
+import zapierLogo from '../assets/brands/zapier_v2.jpeg';
+import githubLogo from '../assets/brands/github_v2.svg';
+import notionLogo from '../assets/brands/notion_v2.webp';
+import makeLogo from '../assets/brands/make_v2.png';
+import n8nLogo from '../assets/brands/n8n_v2.svg';
+import protonLogo from '../assets/brands/proton_v2.svg';
+import googleDocsLogo from '../assets/brands/google_docs_v2.svg';
+import googleSheetsLogo from '../assets/brands/google_sheets_v2.svg';
+import googleDriveLogo from '../assets/brands/google_drive_v2.svg';
+import googleCalendarLogo from '../assets/brands/google_calendar_v2.svg';
+import canvaLogo from '../assets/brands/canva_v2.svg';
+import codePenLogo from '../assets/brands/codepen_v2.svg';
+import dribbbleLogo from '../assets/brands/dribbble_v2.svg';
+import mobbinLogo from '../assets/brands/mobbin_v2.svg';
+import vercelLogo from '../assets/brands/vercel_v2.svg';
+import reactLogo from '../assets/brands/react_v2.png';
+import googleLogo from '../assets/brands/google_v2.svg';
+import geminiLogo from '../assets/brands/gemini_v2.png';
+import windowsLogo from '../assets/brands/windows_v2.svg';
+import base44Logo from '../assets/brands/base44_v2.png';
+import lovableLogo from '../assets/brands/lovable_v2.png';
+
 const Brands: React.FC = () => {
-  const brands = [
-    { name: "Messenger", logo: "BRANDS WE WORK WITH/685bf79d200bebc83172e7e2_messenger.webp" },
-    { name: "iMessage", logo: "BRANDS WE WORK WITH/685bf79d2cecfca83be94287_imessage.webp" },
-    { name: "Replit", logo: "BRANDS WE WORK WITH/685bf79d2dc29ed5b8bcee92_replit.webp" },
-    { name: "GitHub", logo: "BRANDS WE WORK WITH/685bf79d62123cc342bcbc7a_github.webp" },
-    { name: "OneNote", logo: "BRANDS WE WORK WITH/685bf79d98a50e661d7a9c72_onenote.webp" },
-    { name: "Notion", logo: "BRANDS WE WORK WITH/685bf79dadaf5b9ec3e4d993_notion.webp" },
-    { name: "Gmail", logo: "BRANDS WE WORK WITH/685bf79db4af2305e30a1c47_gmail.webp" },
-    { name: "Obsidian", logo: "BRANDS WE WORK WITH/685bf79dbd085cf0d09838f2_obsidian.webp" },
-    { name: "Perplexity", logo: "BRANDS WE WORK WITH/685bf79dd99dd275c84910b5_perplexity.webp" },
-    { name: "Figma", logo: "BRANDS WE WORK WITH/685bf79dea7b28162fd04606_figma.webp" },
-    { name: "Outlook", logo: "BRANDS WE WORK WITH/685bf79ded2f57a63288e023_outlook.webp" },
-    { name: "Google", logo: "BRANDS WE WORK WITH/6863d1d93e34a35502947250_google.webp" },
-    { name: "Tinder", logo: "BRANDS WE WORK WITH/6863d1da7723389966d8b94d_tinder.webp" },
-    { name: "Adobe", logo: "BRANDS WE WORK WITH/6863d1da9f61f0468a378da9_adobe-acrobat-reader.webp" },
-    { name: "TikTok", logo: "BRANDS WE WORK WITH/6863d1daeeaa9e39bb7af1de_tiktok.webp" },
-    { name: "Quora", logo: "BRANDS WE WORK WITH/6863d1daf5defba59688f04d_quora.webp" }
+
+  // Strict Manifest - 23 Items, Exact Order
+  const MANIFEST = [
+    { id: 'zapier', name: 'Zapier', logo: zapierLogo },
+    { id: 'github', name: 'GitHub', logo: githubLogo },
+    { id: 'notion', name: 'Notion', logo: notionLogo },
+    { id: 'make', name: 'Make.com', logo: makeLogo },
+    { id: 'n8n', name: 'n8n', logo: n8nLogo },
+    { id: 'proton', name: 'Proton Mail', logo: protonLogo },
+    { id: 'googledocs', name: 'Google Docs', logo: googleDocsLogo },
+    { id: 'googlesheets', name: 'Google Sheets', logo: googleSheetsLogo },
+    { id: 'googledrive', name: 'Google Drive', logo: googleDriveLogo },
+    { id: 'googlecalendar', name: 'Google Calendar', logo: googleCalendarLogo },
+    { id: 'canva', name: 'Canva', logo: canvaLogo },
+    { id: 'codepen', name: 'CodePen', logo: codePenLogo },
+    { id: 'dribbble', name: 'Dribbble', logo: dribbbleLogo },
+    { id: 'mobbin', name: 'Mobbin', logo: mobbinLogo },
+    { id: 'vercel', name: 'Vercel', logo: vercelLogo },
+    { id: 'react', name: 'React', logo: reactLogo },
+    { id: 'google', name: 'Google', logo: googleLogo },
+    { id: 'gemini', name: 'Gemini', logo: geminiLogo },
+    { id: 'windows', name: 'Windows', logo: windowsLogo },
+    { id: 'base44', name: 'Base44', logo: base44Logo },
+    { id: 'lovable', name: 'Lovable', logo: lovableLogo }
   ];
 
-  // Duplicate brands for seamless loop
+  // Validate: Ensure no missing logos (though static imports would fail build if missing)
+  const brands = MANIFEST.filter(brand => !!brand.logo);
+
+  // Duplicate brands for seamless loop (A + B)
   const duplicatedBrands = [...brands, ...brands];
 
-  return (
-    <section className="py-24 relative overflow-hidden bg-black">
-      {/* Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-900/5 to-transparent pointer-events-none" />
+  if (brands.length === 0) return null;
 
+  return (
+    <section className="py-24 bg-black overflow-hidden relative">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <p className="text-center text-gray-500 text-xs font-semibold uppercase tracking-[0.2em] mb-12">
-          Trusted by Industry Leaders
+          Built with the tools that power modern business
         </p>
 
-        <div className="relative">
-          {/* Gradient Masks */}
-          <div className="absolute left-0 top-0 bottom-0 w-24 md:w-40 z-10 bg-gradient-to-r from-black via-black/80 to-transparent pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 md:w-40 z-10 bg-gradient-to-l from-black via-black/80 to-transparent pointer-events-none" />
-
-          <div className="flex animate-scroll hover:[animation-play-state:paused] cursor-default">
+        <div className="relative marquee-mask overflow-x-hidden overflow-y-visible py-2 -my-2">
+          {/* Scrolling Track */}
+          <div className="flex w-max animate-marquee" style={{ willChange: 'transform' }}>
             {duplicatedBrands.map((brand, i) => (
               <div
-                key={i}
-                className="flex-shrink-0 mx-8 md:mx-12 group"
+                key={`${brand.id}-${i}`}
+                className="flex-shrink-0 mx-8 md:mx-12 flex items-center justify-center group"
               >
-                <div className="relative">
-                  {/* Glow effect on hover */}
-                  <div className="absolute -inset-4 bg-white/5 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                  <img
-                    src={brand.logo}
-                    alt={brand.name}
-                    className="h-10 md:h-12 w-auto object-contain relative z-10 grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110"
-                  />
-                </div>
+                <img
+                  src={brand.logo}
+                  alt={brand.name}
+                  className="h-10 md:h-12 w-auto object-contain grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110"
+                />
               </div>
             ))}
           </div>
         </div>
       </div>
-
-      <style>{`
-        @keyframes scroll {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
-
-        .animate-scroll {
-          animation: scroll 60s linear infinite;
-        }
-      `}</style>
     </section>
   );
 };

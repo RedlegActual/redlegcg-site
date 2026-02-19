@@ -7,8 +7,8 @@
 :root {
   --background: #000000;
   --foreground: #ffffff;
-  --primary: #3b82f6; 
-  --primary-glow: rgba(59, 130, 246, 0.5);
+  --primary: #b91c1c;
+  --primary-glow: rgba(185, 28, 28, 0.5);
 }
 
 body {
@@ -21,7 +21,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: 'Outfit', sans-serif;
 }
 
@@ -45,8 +50,17 @@ h1, h2, h3, h4, h5, h6 {
   color: transparent;
 }
 
+.text-gradient-red {
+  background: linear-gradient(to right, #ef4444, #b91c1c);
+  /* Red-500 to Red-700 */
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 .text-gradient-blue {
-  background: linear-gradient(to right, #60a5fa, #a78bfa);
+  /* Map legacy class to new red theme to catch missed references */
+  background: linear-gradient(to right, #ef4444, #b91c1c);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -59,7 +73,7 @@ html {
 
 /* Selection */
 ::selection {
-  background: rgba(59, 130, 246, 0.3);
+  background: rgba(185, 28, 28, 0.3);
   color: white;
 }
 
@@ -70,4 +84,41 @@ a[href*="cal.com"][target="_blank"],
 div[class*="branding"],
 div[class*="powered"] {
   display: none !important;
+}
+
+/* Marquee Animation */
+/* Marquee Animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 60s linear infinite;
+  will-change: transform;
+}
+
+.marquee-mask {
+  /* Fade content itself, not an overlay */
+  -webkit-mask-image: linear-gradient(to right,
+      transparent 0%,
+      black 10%,
+      black 90%,
+      transparent 100%);
+  mask-image: linear-gradient(to right,
+      transparent 0%,
+      black 10%,
+      black 90%,
+      transparent 100%);
+
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
 }

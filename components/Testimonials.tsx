@@ -1,64 +1,80 @@
 import React from 'react';
 
 const Testimonials: React.FC = () => {
-  const reviews = [
-    {
-      name: "Michael Chen",
-      role: "Founder, Scale Digital",
-      text: "We went from zero LinkedIn presence to 17 qualified discovery calls in the first 45 days. Closed 4 new clients worth $78k in recurring revenue. This completely changed how we think about client acquisition.",
-      img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&q=80"
-    },
-    {
-      name: "Jennifer Martinez",
-      role: "CEO, Growth Labs Agency",
-      text: "I was skeptical because I'd tried LinkedIn before with zero results. Within 3 weeks we had our calendar filled with ideal-fit prospects. We've since brought on 6 new retainer clients and had to expand our team.",
-      img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&q=80"
-    },
-    {
-      name: "David Thompson",
-      role: "Managing Partner, Apex Consulting",
-      text: "Finally, a predictable lead source that doesn't require me to do anything. We're booking 8-12 calls per month with decision-makers who actually have budget. Best ROI we've ever seen from any marketing channel.",
-      img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&q=80"
-    }
-  ];
+
 
   return (
     <section className="py-32 relative">
       {/* Background Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-red-900/10 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <h2 className="text-4xl md:text-5xl font-bold mb-20 text-center">
-          Real Results from <span className="text-gradient-blue">Real Agencies</span>
-        </h2>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {reviews.map((r, i) => (
-            <div key={i} className="glass-panel p-8 md:p-10 rounded-3xl relative group hover:-translate-y-2 transition-transform duration-500">
-              {/* Quote Icon */}
-              <div className="absolute top-6 right-8 text-white/5 group-hover:text-blue-500/20 transition-colors duration-500">
-                <svg className="w-16 h-16" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H15.017C14.4647 8 14.017 8.44772 14.017 9V12C14.017 12.5523 13.5693 13 13.017 13H11.017C10.4647 13 10.017 12.5523 10.017 12V9C10.017 6.23858 12.2556 4 15.017 4H19.017C21.7784 4 24.017 6.23858 24.017 9V15C24.017 18.3137 21.3307 21 18.017 21H14.017ZM4.017 21L4.017 18C4.017 16.8954 4.91243 16 6.017 16H9.017C9.56928 16 10.017 15.5523 10.017 15V9C10.017 8.44772 9.56928 8 9.017 8H5.017C4.46472 8 4.017 8.44772 4.017 9V12C4.017 12.5523 3.56928 13 3.017 13H1.017C0.464722 13 0.017 12.5523 0.017 12V9C0.017 6.23858 2.25558 4 5.017 4H9.017C11.7784 4 14.017 6.23858 14.017 9V15C14.017 18.3137 11.3307 21 8.017 21H4.017Z" />
-                </svg>
-              </div>
+        {/* About Section - Split Layout */}
+        <div className="grid md:grid-cols-2 gap-16 items-center">
+          {/* Left Side: Photo */}
+          <div className="relative group">
+            <div className="absolute inset-0 bg-red-800/20 blur-[60px] rounded-full" />
+            <div className="glass-panel p-4 rounded-3xl border border-white/10 relative z-10 transform hover:scale-[1.01] transition-transform duration-500">
+              <div className="aspect-[4/5] bg-neutral-900 rounded-2xl border border-white/5 overflow-hidden relative group">
+                {/* Cody Lancaster Portrait */}
+                <img
+                  src="assets/cody-lancaster-portrait.jpg"
+                  alt="Cody Lancaster"
+                  className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-700"
+                  style={{ filter: 'saturate(0.55) brightness(0.78) contrast(1.18) grayscale(0.12) hue-rotate(-6deg)' }}
+                />
 
-              <div className="flex items-center gap-4 mb-8">
-                <div className="relative">
-                  <div className="absolute inset-0 bg-blue-500 rounded-full blur-md opacity-20" />
-                  <img src={r.img} className="w-14 h-14 rounded-full border border-white/10 relative z-10" alt={r.name} />
+                {/* Gradient Overlays */}
+                <div className="absolute inset-0 bg-gradient-to-bl from-black/70 via-transparent to-transparent pointer-events-none z-10" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none z-10" />
+
+                <div className="absolute bottom-6 left-6 right-6 z-10">
+                  <div className="inline-flex px-3 py-1 rounded-full bg-red-900/60 border border-red-500/30 backdrop-blur-md mb-3">
+                    <span className="text-xs font-bold text-red-400">FOUNDER</span>
+                  </div>
+                  <h3 className="text-2xl font-bold text-white">Cody Lancaster</h3>
+                  <p className="text-white/60 text-sm">U.S. Army Veteran</p>
                 </div>
-                <div>
-                  <h4 className="font-bold text-white text-lg">{r.name}</h4>
-                  <p className="text-blue-400 text-sm font-medium">{r.role}</p>
-                </div>
               </div>
+            </div>
+          </div>
 
-              <p className="text-gray-300 italic leading-relaxed relative z-10">
-                "{r.text}"
+          {/* Right Side: Content */}
+          <div className="space-y-8">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-300 text-xs font-bold uppercase tracking-wider mb-6">
+                ABOUT REDLEG CONSULTING GROUP
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-8">
+                "Structure matters.<br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-400">In business, it protects outcomes."</span>
+              </h2>
+              <p className="text-gray-400 text-lg leading-relaxed mb-6">
+                Field artillery trained me to work with precision and discipline. I bring that same approach to building websites and digital systems for businesses. <a href="https://www.fieldartillery.org/the-story-of-the-redleg" target="_blank" rel="noopener noreferrer" className="text-white hover:text-red-500 transition-colors underline decoration-white/20 hover:decoration-red-500/50 underline-offset-4">Redleg</a> is the traditional nickname for U.S. Army Field Artillery. The goal is simple: remove confusion, build stability, and support long-term growth.
+              </p>
+              <p className="text-white font-medium text-lg border-l-4 border-red-600 pl-4">
+                Thoughtful systems. Built carefully.
               </p>
             </div>
-          ))}
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+              <div className="glass-panel p-4 rounded-xl border border-white/10">
+                <div className="text-red-500 mb-2">
+                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+                </div>
+                <h4 className="font-bold text-white text-sm">Systems & Site Architecture</h4>
+              </div>
+              <div className="glass-panel p-4 rounded-xl border border-white/10">
+                <div className="text-red-500 mb-2">
+                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                </div>
+                <h4 className="font-bold text-white text-sm">Automation That Fits</h4>
+              </div>
+            </div>
+          </div>
         </div>
+
       </div>
     </section>
   );

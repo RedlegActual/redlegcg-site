@@ -16,7 +16,7 @@ interface SEOProps {
 const SEO: React.FC<SEOProps> = ({
   title,
   description,
-  image = '/Logo/1.png',
+  image = '/assets/redleg-logo-main.png',
   url = typeof window !== 'undefined' ? window.location.href : '',
   type = 'website',
   publishedTime,
@@ -25,8 +25,8 @@ const SEO: React.FC<SEOProps> = ({
   tags,
   structuredData
 }) => {
-  const siteName = 'Scale With Teddy';
-  const fullTitle = `${title} | ${siteName}`;
+  const siteName = 'Redleg Consulting Group';
+  const fullTitle = `${siteName} | ${title}`;
 
   useEffect(() => {
     // Update document title
@@ -88,7 +88,7 @@ const SEO: React.FC<SEOProps> = ({
 
     // Structured Data (JSON-LD)
     if (structuredData) {
-      let script = document.querySelector('script[type="application/ld+json"]');
+      let script = document.querySelector('script[type="application/ld+json"]') as HTMLScriptElement;
       if (!script) {
         script = document.createElement('script');
         script.type = 'application/ld+json';

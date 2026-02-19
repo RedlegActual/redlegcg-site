@@ -96,6 +96,18 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({ onComplete }) => {
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
+
+    // Safety check: if webhook isn't configured, just simulate success
+    if (!webhookUrl) {
+      setTimeout(() => {
+        setCurrentStep(6);
+        setIsSubmitting(false);
+        // We don't call onComplete immediately so user sees the success message
+        setTimeout(onComplete, 3000);
+      }, 1000);
+      return;
+    }
+
     try {
       await fetch(webhookUrl, {
         method: 'POST',
@@ -104,9 +116,11 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({ onComplete }) => {
         },
         body: JSON.stringify(formData),
       });
-      onComplete();
+      setCurrentStep(6);
+      setTimeout(onComplete, 3000);
     } catch (error) {
-      console.error('Error submitting form:', error);
+      // Fail silently in production or show generic error
+      console.error('Submission error:', error);
       alert('There was an error submitting your information. Please try again.');
       setIsSubmitting(false);
     }
@@ -232,8 +246,8 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({ onComplete }) => {
                       // but generic select behavior is safer. We'll just select it.
                     }}
                     className={`p-4 rounded-xl border text-left transition-all ${formData.employees === opt
-                        ? 'bg-blue-600 border-blue-500 text-white shadow-[0_0_15px_rgba(37,99,235,0.5)]'
-                        : 'bg-white/5 border-white/10 text-gray-300 hover:bg-white/10'
+                      ? 'bg-blue-600 border-blue-500 text-white shadow-[0_0_15px_rgba(37,99,235,0.5)]'
+                      : 'bg-white/5 border-white/10 text-gray-300 hover:bg-white/10'
                       }`}
                   >
                     {opt}
@@ -276,8 +290,8 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({ onComplete }) => {
                     key={opt}
                     onClick={() => updateField('revenue', opt)}
                     className={`p-4 rounded-xl border text-left transition-all ${formData.revenue === opt
-                        ? 'bg-blue-600 border-blue-500 text-white shadow-[0_0_15px_rgba(37,99,235,0.5)]'
-                        : 'bg-white/5 border-white/10 text-gray-300 hover:bg-white/10'
+                      ? 'bg-blue-600 border-blue-500 text-white shadow-[0_0_15px_rgba(37,99,235,0.5)]'
+                      : 'bg-white/5 border-white/10 text-gray-300 hover:bg-white/10'
                       }`}
                   >
                     {opt}
@@ -332,8 +346,8 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({ onComplete }) => {
                     key={opt}
                     onClick={() => updateField('ownership', opt)}
                     className={`w-full p-4 rounded-xl border text-left transition-all ${formData.ownership === opt
-                        ? 'bg-blue-600 border-blue-500 text-white shadow-[0_0_15px_rgba(37,99,235,0.5)]'
-                        : 'bg-white/5 border-white/10 text-gray-300 hover:bg-white/10'
+                      ? 'bg-blue-600 border-blue-500 text-white shadow-[0_0_15px_rgba(37,99,235,0.5)]'
+                      : 'bg-white/5 border-white/10 text-gray-300 hover:bg-white/10'
                       }`}
                   >
                     {opt}
@@ -358,6 +372,23 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({ onComplete }) => {
               >
                 {isSubmitting ? 'Calculating...' : 'Generate My Roadmap'}
               </button>
+            </div>
+          </div>
+        )}
+
+        {/* Success State */}
+        {currentStep === 6 && (
+          <div className="space-y-8 fade-in-up text-center py-8">
+            <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-6 ring-1 ring-green-500/50 shadow-[0_0_30px_rgba(34,197,94,0.2)]">
+              <svg className="w-10 h-10 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <div>
+              <h3 className="text-3xl font-bold text-white mb-4">You're All Set.</h3>
+              <p className="text-gray-400 text-lg leading-relaxed max-w-md mx-auto">
+                We've received your details. Your custom roadmap is being generated and will be sent to your email shortly.
+              </p>
             </div>
           </div>
         )}

@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import SEO from './SEO';
@@ -67,7 +68,7 @@ const ArticlePage: React.FC = () => {
   if (!article) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-400"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-red-500"></div>
       </div>
     );
   }
@@ -86,10 +87,10 @@ const ArticlePage: React.FC = () => {
     },
     publisher: {
       '@type': 'Organization',
-      name: 'Scale With Teddy',
+      name: 'Redleg Consulting Group',
       logo: {
         '@type': 'ImageObject',
-        url: '/Logo/1.png'
+        url: '/assets/redleg-logo-main.png'
       }
     },
     mainEntityOfPage: {
@@ -159,7 +160,7 @@ const ArticlePage: React.FC = () => {
               {/* Article Header */}
               <header className="mb-12">
                 <div className="flex items-center gap-3 mb-6">
-                  <span className="px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-sm font-medium">
+                  <span className="px-3 py-1 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-sm font-medium">
                     {article.category}
                   </span>
                   {article.tags.map((tag) => (
@@ -182,7 +183,7 @@ const ArticlePage: React.FC = () => {
 
                 <div className="flex items-center gap-4 text-sm text-gray-400">
                   <div className="flex items-center gap-2">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 p-[2px]">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-red-500 to-red-900 p-[2px]">
                       <div className="w-full h-full rounded-full bg-black flex items-center justify-center text-white font-bold">
                         {article.author[0]}
                       </div>
@@ -240,11 +241,10 @@ const ArticlePage: React.FC = () => {
                       <a
                         key={item.id}
                         href={`#${item.id}`}
-                        className={`block text-sm transition-colors ${
-                          activeSection === item.id
-                            ? 'text-blue-400 font-medium'
+                        className={`block text-sm transition-colors ${activeSection === item.id
+                            ? 'text-red-400 font-medium'
                             : 'text-gray-400 hover:text-white'
-                        } ${item.level === 3 ? 'pl-4' : ''}`}
+                          } ${item.level === 3 ? 'pl-4' : ''}`}
                       >
                         {item.text}
                       </a>
@@ -276,10 +276,10 @@ const ArticlePage: React.FC = () => {
                       </div>
                     )}
                     <div className="p-6">
-                      <span className="text-xs text-blue-400 font-medium">
+                      <span className="text-xs text-red-400 font-medium">
                         {related.category}
                       </span>
-                      <h3 className="text-white font-bold mt-2 mb-2 group-hover:text-blue-400 transition-colors">
+                      <h3 className="text-white font-bold mt-2 mb-2 group-hover:text-red-400 transition-colors">
                         {related.title}
                       </h3>
                       <p className="text-gray-400 text-sm mb-3">{related.description}</p>

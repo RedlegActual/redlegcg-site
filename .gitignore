@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Security Considerations
+.env.local
+.env.*
+.vercel
+*.log

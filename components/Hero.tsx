@@ -1,130 +1,163 @@
 
 import React, { useEffect, useRef } from 'react';
+import Wordmark from './Wordmark';
 
-const Starfield: React.FC = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+const Hero: React.FC = () => {
+  const heroRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    const hero = heroRef.current;
+    if (!hero) return;
 
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+    // Desktop Only: Apply only when (hover: hover) and (pointer: fine)
+    const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (!isDesktop) return;
 
-    let animationFrameId: number;
-    let stars: Star[] = [];
-    const starCount = 150;
-    let mouseX = 0;
-    let mouseY = 0;
+    let rafId: number;
+    let rect = hero.getBoundingClientRect();
 
-    class Star {
-      x: number;
-      y: number;
-      size: number;
-      baseOpacity: number;
-      opacity: number;
-      twinkleSpeed: number;
-      parallaxFactor: number;
-
-      constructor(width: number, height: number) {
-        this.x = Math.random() * width;
-        this.y = Math.random() * height;
-        this.size = Math.random() * 1.5;
-        this.baseOpacity = Math.random() * 0.5 + 0.2;
-        this.opacity = this.baseOpacity;
-        this.twinkleSpeed = Math.random() * 0.02;
-        this.parallaxFactor = Math.random() * 20;
-      }
-
-      update(width: number, height: number, mX: number, mY: number) {
-        // Twinkle
-        this.opacity = this.baseOpacity + Math.sin(Date.now() * this.twinkleSpeed) * 0.2;
-
-        // Slow drift
-        this.y -= 0.05;
-        if (this.y < 0) this.y = height;
-
-        // Render with parallax offset
-        const offsetX = (mX - width / 2) / (100 - this.parallaxFactor);
-        const offsetY = (mY - height / 2) / (100 - this.parallaxFactor);
-
-        return { x: this.x + offsetX, y: this.y + offsetY };
-      }
-
-      draw(context: CanvasRenderingContext2D, coords: { x: number; y: number }) {
-        context.beginPath();
-        context.arc(coords.x, coords.y, this.size, 0, Math.PI * 2);
-        context.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
-        context.fill();
-      }
-    }
-
-    const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      stars = Array.from({ length: starCount }, () => new Star(canvas.width, canvas.height));
-    };
+    // Initialize positions
+    let targetX = rect.width / 2;
+    let targetY = rect.height / 3; // Start slightly higher
+    let currentX = targetX;
+    let currentY = targetY;
+    let isHovering = false;
 
     const handleMouseMove = (e: MouseEvent) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
+      isHovering = true;
+      // Get fresh rect to ensure accuracy
+      rect = hero.getBoundingClientRect();
+      targetX = e.clientX - rect.left;
+      targetY = e.clientY - rect.top;
     };
 
-    const render = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      stars.forEach(star => {
-        const coords = star.update(canvas.width, canvas.height, mouseX, mouseY);
-        star.draw(ctx, coords);
-      });
-      animationFrameId = requestAnimationFrame(render);
+    const handleMouseLeave = () => {
+      isHovering = false;
     };
 
-    window.addEventListener('resize', resize);
-    window.addEventListener('mousemove', handleMouseMove);
-    resize();
-    render();
+    const handleResize = () => {
+      rect = hero.getBoundingClientRect();
+    };
+
+    const animate = () => {
+      const maxY = rect.height - 280; // Fade height exclusion
+
+      // Determine destination based on state
+      let destX = targetX;
+      let destY = targetY;
+
+      if (!isHovering) {
+        // Drift toward a rest point inside safe zone when inactive
+        destX = rect.width / 2;
+        destY = rect.height / 3;
+      } else {
+        // Clamp cursor target to safe zone when active
+        destX = Math.max(0, Math.min(rect.width, targetX));
+        destY = Math.max(0, Math.min(maxY, targetY));
+      }
+
+      // Adaptive Smoothing Logic
+      // Calculate proximity to the bottom boundary (safe zone edge)
+      const distToEdge = Math.max(0, maxY - currentY);
+      const edgeThreshold = 300; // Pixel distance where slowing begins
+      const proximity = Math.min(1, distToEdge / edgeThreshold); // 0 (at edge) to 1 (far away)
+
+      // Dynamic lerp factors:
+      // When NOT hovering: very slow drift (0.01)
+      // When hovering: 0.1 (crisp) far from edge, dropping to 0.02 (heavy) near edge
+      let lerpFactorX = isHovering ? 0.1 : 0.01;
+      let lerpFactorY = isHovering ? (0.02 + (0.08 * proximity)) : 0.01;
+
+      // Interpolate current position toward destination
+      currentX += (destX - currentX) * lerpFactorX;
+      currentY += (destY - currentY) * lerpFactorY;
+
+      // Update CSS variables directly
+      hero.style.setProperty('--hero-mask-x', `${currentX}px`);
+      hero.style.setProperty('--hero-mask-y', `${currentY}px`);
+
+      rafId = requestAnimationFrame(animate);
+    };
+
+    window.addEventListener('resize', handleResize);
+    hero.addEventListener('mousemove', handleMouseMove);
+    hero.addEventListener('mouseleave', handleMouseLeave);
+
+    // Start animation loop
+    animate();
 
     return () => {
-      window.removeEventListener('resize', resize);
-      window.removeEventListener('mousemove', handleMouseMove);
-      cancelAnimationFrame(animationFrameId);
+      window.removeEventListener('resize', handleResize);
+      hero.removeEventListener('mousemove', handleMouseMove);
+      hero.removeEventListener('mouseleave', handleMouseLeave);
+      if (rafId) cancelAnimationFrame(rafId);
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" />;
-};
-
-const Hero: React.FC = () => {
-
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center pt-4 pb-20 overflow-hidden bg-black">
-      {/* Dynamic Starfield */}
-      <Starfield />
+    <section
+      ref={heroRef}
+      className="relative min-h-screen flex flex-col items-center justify-center pt-4 pb-20 overflow-hidden bg-black group/hero"
+      style={{
+        // Default values to prevent layout shift before JS loads or if mouse hasn't moved
+        '--hero-mask-x': '50%',
+        '--hero-mask-y': '50%',
+      } as React.CSSProperties}
+    >
+      {/* Layer 1: Base Background (handled by bg-black on section) */}
+
+      {/* Layer 2: Subtle Technical Grid */}
+      <div
+        className="absolute inset-0 z-0 opacity-10 pointer-events-none"
+        style={{
+          backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
+          backgroundSize: '40px 40px'
+        }}
+      />
+
+      {/* Layer 3: Radial Mask Reveal of Fort Clinch */}
+      <div
+        className="absolute inset-0 z-0 pointer-events-none transition-opacity duration-700 ease-out"
+        style={{
+          maskImage: 'radial-gradient(circle 600px at var(--hero-mask-x) var(--hero-mask-y), black 0%, transparent 70%)',
+          WebkitMaskImage: 'radial-gradient(circle 600px at var(--hero-mask-x) var(--hero-mask-y), black 0%, transparent 70%)',
+        }}
+      >
+        <img
+          src="/assets/cannons.png"
+          alt="Fort Clinch Background"
+          className="w-full h-full object-cover grayscale opacity-30 blur-[2px] scale-105"
+        />
+      </div>
+
+      {/* Teddy Style Bottom Fade */}
+      <div className="absolute bottom-0 inset-x-0 h-[280px] bg-gradient-to-t from-black to-transparent pointer-events-none z-0" />
 
       {/* Logo */}
-      <div className="mb-20 relative z-10 mt-4">
-        <img
-          src="Logo/1.png"
-          alt="Logo"
-          className="h-8 md:h-10 w-auto"
-        />
+      <div className="mb-20 relative z-10 mt-4 flex flex-col items-center">
+        <h2 className="text-red-500 font-extrabold text-5xl md:text-6xl tracking-tight leading-none">
+          REDLEG
+        </h2>
+        <span className="text-white font-semibold tracking-[0.15em] text-lg md:text-xl mt-1 md:mt-2">
+          CONSULTING GROUP
+        </span>
       </div>
 
       {/* Headlines */}
       <div className="text-center max-w-5xl px-6 relative z-10 transition-all duration-1000">
 
         <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8 opacity-0 animate-[fadeInUp_1s_ease-out_0.2s_forwards] leading-[1.1]">
-          <span className="text-white">Ready to Get 5 Clients from</span><br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 animate-gradient-x">LinkedIn in 30 Days?</span>
+          <span className="text-white">Websites Built With Precision.</span><br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-red-300 to-red-500 animate-gradient-x">Designed For Growth.</span>
         </h1>
 
-        <p className="text-gray-400 text-lg md:text-xl leading-relaxed max-w-3xl mx-auto mb-12 opacity-0 animate-[fadeInUp_1s_ease-out_0.4s_forwards] font-light">
-          If you're making <span className="text-white font-medium">$50k/mo+ online</span> and want a hands-off LinkedIn revenue stream, we'll show you exactly how much profit you're leaving on the table.
+        <p className="text-gray-400 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-12 opacity-0 animate-[fadeInUp_1s_ease-out_0.4s_forwards] font-light">
+          Veteran-led web design and systems consulting<br className="hidden md:block" /> so your business runs clearly and confidently.
         </p>
 
         {/* Hero Dashboard Graphic (Reduced Size) */}
         <div className="relative z-10 w-full max-w-3xl mx-auto mb-0 opacity-0 animate-[fadeInUp_1s_ease-out_0.5s_forwards] scale-90 origin-top">
-          <div className="absolute inset-0 bg-blue-500/10 blur-[80px] rounded-full" />
+          <div className="absolute inset-0 bg-red-900/10 blur-[80px] rounded-full" />
 
           {/* Main Dashboard Glass Panel */}
           <div className="glass-panel w-full aspect-[16/9] md:aspect-[21/9] rounded-3xl border border-white/10 relative z-10 overflow-hidden flex flex-col shadow-2xl group hover:border-white/20 transition-all duration-500">
@@ -138,7 +171,7 @@ const Hero: React.FC = () => {
               </div>
               <div className="text-[10px] font-mono text-gray-400 flex items-center gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                Live Revenue Tracking
+                System Status: Active
               </div>
             </div>
 
@@ -149,139 +182,92 @@ const Hero: React.FC = () => {
                 style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)', backgroundSize: '30px 30px' }}
               />
 
-              {/* Left Column: Profile & LinkedIn */}
+              {/* Left Column: Founder Block */}
               <div className="hidden md:flex flex-col gap-4 w-56 z-10">
                 {/* Profile Card */}
                 <div className="bg-white/5 rounded-2xl p-3 border border-white/10 flex items-center gap-3 hover:bg-white/10 transition-colors">
-                  <div className="w-10 h-10 rounded-full p-[1px] bg-gradient-to-tr from-blue-500 to-purple-500">
-                    <img src="Logo/jack profile .png" alt="Jack Roberts" className="w-full h-full rounded-full object-cover" />
+                  <div className="w-10 h-10 rounded-full bg-red-900/20 flex items-center justify-center border border-red-500/20 overflow-hidden flex-shrink-0">
+                    <img
+                      src="/assets/field-artillery-insignia.png"
+                      alt="Redleg Icon"
+                      className="w-full h-full object-contain object-center scale-125"
+                    />
                   </div>
-                  <div>
-                    <div className="text-sm font-bold text-white">Jack Roberts</div>
-                    <div className="text-[10px] text-green-400">Top 1% Creator</div>
+                  <div className="flex flex-col items-center">
+                    <div className="text-sm font-bold text-white leading-none">Cody Lancaster</div>
+                    <div className="text-[10px] font-medium text-red-400/90 mt-1">Redleg Consulting Group</div>
                   </div>
                 </div>
 
-                {/* LinkedIn Box */}
-                <div className="bg-[#0077b5]/10 rounded-2xl p-4 border border-[#0077b5]/30 flex flex-col h-full group/linkedin hover:bg-[#0077b5]/20 transition-all relative overflow-hidden">
-                  <div className="flex items-center gap-3 mb-2 z-10">
-                    <img src="Logo/LinkedIn_logo_initials.png.webp" alt="LinkedIn" className="w-8 h-8 object-contain" />
-                    <div>
-                      <div className="text-xl font-bold text-white leading-none">15.2k</div>
-                      <div className="text-[10px] text-blue-200">Total Followers</div>
-                    </div>
+                {/* Status Box */}
+                <div className="bg-neutral-900/50 rounded-2xl p-4 border border-white/10 flex flex-col h-full group/status hover:bg-white/5 transition-all relative overflow-hidden justify-center items-center text-center">
+                  <div className="flex flex-col gap-0.5 z-10 w-full">
+                    <span className="text-[10px] text-gray-500 uppercase tracking-wider mb-2">Availability</span>
+                    <div className="text-xl font-bold text-white leading-none">Open</div>
+                    <div className="text-[10px] text-green-400 mt-1.5">Currently Booking</div>
                   </div>
-
-                  {/* "Nice little blue something" - Blue Pulse Graph */}
-                  <div className="flex-1 flex items-end gap-[2px] mt-2 z-10">
-                    {[40, 60, 45, 70, 50, 80, 60, 90, 75, 100].map((h, i) => (
-                      <div key={i} style={{ height: `${h}%` }} className="w-full bg-blue-400/40 rounded-t-[1px]" />
-                    ))}
-                  </div>
-
-                  {/* Blue Glow Background */}
-                  <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-blue-500/20 blur-xl rounded-full" />
+                  {/* Red Glow Background */}
+                  <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-red-900/10 blur-xl rounded-full" />
                 </div>
               </div>
 
-              {/* Right Column: Chart & Stats */}
+              {/* Right Column: Stack & Highlights */}
               <div className="flex-1 flex flex-col z-10 gap-4">
-                {/* Stats Row */}
+                {/* Stack Row */}
                 <div className="grid grid-cols-3 gap-3">
-                  <div className="bg-white/5 rounded-xl p-3 border border-white/5 hover:border-white/10 transition-colors">
-                    <div className="text-gray-400 text-[10px] uppercase tracking-wider">Total Revenue</div>
-                    <div className="text-xl font-bold text-white mt-1">$124,500</div>
-                    <div className="text-green-400 text-[10px] mt-1 flex items-center gap-1">
-                      <span>▲</span> 12% vs last month
+                  <div className="bg-white/5 rounded-xl p-3 border border-white/5 hover:border-white/10 transition-colors flex flex-col items-center text-center justify-center h-full">
+                    <div className="text-gray-400 text-[10px] uppercase tracking-wider">WEBSITES</div>
+                    <div className="text-sm font-bold text-white mt-0.5">Fast</div>
+                    <div className="text-green-400 text-[10px] mt-0.5 flex items-center justify-center gap-1">
+                      Built for real users
                     </div>
                   </div>
-                  <div className="bg-white/5 rounded-xl p-3 border border-white/5 hover:border-white/10 transition-colors">
-                    <div className="text-gray-400 text-[10px] uppercase tracking-wider">Pipeline Value</div>
-                    <div className="text-xl font-bold text-white mt-1">$52,000</div>
-                    <div className="text-green-400 text-[10px] mt-1 flex items-center gap-1">
-                      <span>▲</span> 8% vs last month
+                  <div className="bg-white/5 rounded-xl p-3 border border-white/5 hover:border-white/10 transition-colors flex flex-col items-center text-center justify-center h-full">
+                    <div className="text-gray-400 text-[10px] uppercase tracking-wider">SYSTEMS</div>
+                    <div className="text-sm font-bold text-white mt-0.5">Clean</div>
+                    <div className="text-green-400 text-[10px] mt-0.5 flex items-center justify-center gap-1">
+                      Simple to run
                     </div>
                   </div>
-                  <div className="bg-white/5 rounded-xl p-3 border border-white/5 hidden sm:block hover:border-white/10 transition-colors">
-                    <div className="text-gray-400 text-[10px] uppercase tracking-wider">Booked Calls</div>
-                    <div className="text-xl font-bold text-white mt-1">48</div>
-                    <div className="text-green-400 text-[10px] mt-1 flex items-center gap-1">
-                      <span>▲</span> 24% vs last month
+                  <div className="bg-white/5 rounded-xl p-3 border border-white/5 hidden sm:flex flex-col items-center text-center hover:border-white/10 transition-colors justify-center h-full">
+                    <div className="text-gray-400 text-[10px] uppercase tracking-wider">AUTOMATION</div>
+                    <div className="text-sm font-bold text-white mt-0.5">Practical</div>
+                    <div className="text-green-400 text-[10px] mt-0.5 flex items-center justify-center gap-1">
+                      Saves time, stays stable
                     </div>
                   </div>
                 </div>
 
-                {/* Enhanced Graph Area */}
-                {/* Weekly Growth Panel (Replaces Blue Graph) */}
-                <div className="flex-1 bg-white/5 rounded-2xl border border-white/10 relative overflow-hidden flex flex-col group/chart hover:border-white/20 transition-all">
-                  <div className="px-6 pt-5 pb-2 flex items-center justify-between z-10">
-                    <div>
-                      <div className="text-gray-400 text-[10px] uppercase tracking-wider mb-1">Weekly Growth</div>
-                      <div className="text-3xl font-bold text-white">+24.5%</div>
-                    </div>
-                    <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center">
-                      <svg className="w-5 h-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                      </svg>
+                {/* Highlight Panel */}
+                <div className="flex-1 bg-white/5 rounded-2xl border border-white/10 relative overflow-hidden flex flex-col group/chart hover:border-white/20 transition-all justify-center items-center p-4">
+                  <div className="text-center space-y-1 z-10">
+                    <h3 className="text-2xl font-bold text-white tracking-widest leading-none">Built around your business.</h3>
+                    <div className="flex items-center justify-center gap-2 text-xs text-gray-400 uppercase tracking-widest pt-1">
+                      <span>Understand</span>
+                      <span className="text-red-500">→</span>
+                      <span>Build</span>
+                      <span className="text-red-500">→</span>
+                      <span>Improve</span>
                     </div>
                   </div>
-
-                  {/* Full Width Green Graph */}
-                  <div className="flex-1 relative w-full overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-t from-green-500/10 to-transparent opacity-50" />
-                    <svg className="absolute inset-0 w-full h-full transform scale-x-105 scale-y-110 origin-bottom" preserveAspectRatio="none" viewBox="0 0 360 200">
-                      <defs>
-                        <linearGradient id="largeGreenGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                          <stop offset="0%" stopColor="rgba(74, 222, 128, 0.4)" />
-                          <stop offset="100%" stopColor="rgba(74, 222, 128, 0)" />
-                        </linearGradient>
-                      </defs>
-                      <path d="M0,120 L40,100 L80,110 L120,80 L160,90 L200,60 L240,70 L280,40 L320,50 L360,20 V200 H0 Z"
-                        fill="url(#largeGreenGradient)"
-                      />
-                      <path d="M0,120 L40,100 L80,110 L120,80 L160,90 L200,60 L240,70 L280,40 L320,50 L360,20"
-                        fill="none"
-                        stroke="#4ade80"
-                        strokeWidth="3"
-                        vectorEffect="non-scaling-stroke"
-                        className="drop-shadow-lg"
-                      />
-                    </svg>
-
-                    {/* Interactive Vertical Hover Line */}
-                    <div className="absolute inset-x-0 inset-y-0 opacity-0 group-hover/chart:opacity-100 transition-opacity duration-300">
-                      <div className="w-[1px] h-full bg-white/20 absolute left-1/2" />
-                      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 bg-black/80 text-white text-[10px] px-2 py-1 rounded border border-white/10">
-                        $4,250
-                      </div>
-                    </div>
-                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-red-900/10 to-transparent"></div>
                 </div>
               </div>
-
-
 
             </div>
           </div>
-
-          <style>{`
-            @keyframes growUp {
-              from { height: 0; opacity: 0; }
-              to { opacity: 1; }
-            }
-          `}</style>
         </div>
 
         {/* CTA Button */}
         <div className="opacity-0 animate-[fadeInUp_1s_ease-out_0.6s_forwards] relative group mt-8 inline-flex justify-center items-center">
           {/* Animated Glow Ring */}
-          <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500 rounded-xl blur opacity-60 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
+          <div className="absolute -inset-1 bg-gradient-to-r from-red-500 via-red-800 to-red-500 rounded-xl blur opacity-60 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
 
-          {/* Cosmic blue glow behind button - Tightened Match */}
+          {/* Cosmic red glow behind button */}
           <div className="absolute inset-0 z-0 pointer-events-none transition-opacity duration-500 group-hover:opacity-100 opacity-60 rounded-xl overflow-hidden">
             <div className="absolute inset-0 animate-[cosmicShift_14s_ease-in-out_infinite]"
               style={{
-                background: 'radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.4) 0%, transparent 60%)',
+                background: 'radial-gradient(circle at 50% 50%, rgba(185, 28, 28, 0.4) 0%, transparent 60%)',
                 filter: 'blur(10px)'
               }} />
           </div>
@@ -290,15 +276,15 @@ const Hero: React.FC = () => {
             onClick={() => document.getElementById('booking-section')?.scrollIntoView({ behavior: 'smooth' })}
             className="relative z-10 flex items-center gap-2 bg-white text-black px-8 py-3.5 text-base font-bold hover:bg-gray-100 transition-all rounded-xl cursor-pointer hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] hover:scale-[1.02] active:scale-[0.98] group/btn"
           >
-            Scale My Business
+            Let’s Build
           </button>
         </div>
       </div>
 
-      {/* Enhanced Breathing Horizon Glow - positioned behind form */}
+      {/* Enhanced Breathing Horizon Glow */}
       <div className="absolute bottom-60 left-[-30%] w-[160%] h-[400px] z-0 pointer-events-none animate-[pulse_8s_ease-in-out_infinite]"
         style={{
-          background: 'radial-gradient(ellipse at center, rgba(255, 170, 0, 0.2) 0%, transparent 75%)',
+          background: 'radial-gradient(ellipse at center, rgba(185, 28, 28, 0.2) 0%, transparent 75%)',
           borderTop: '1px solid rgba(255, 255, 255, 0.05)',
           borderRadius: '50% / 100% 100% 0 0',
           filter: 'blur(40px)'
@@ -335,10 +321,6 @@ const Hero: React.FC = () => {
           }
         }
 
-        .bg-gradient-radial {
-          background: radial-gradient(circle, var(--tw-gradient-stops));
-        }
-
         @keyframes cosmicButtonGlow {
           0%, 100% {
             transform: scale(1) translate(0, 0);
@@ -351,15 +333,6 @@ const Hero: React.FC = () => {
           66% {
             transform: scale(1.05) translate(-3px, 3px);
             opacity: 0.7;
-          }
-        }
-
-        @keyframes fadeInGlow {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
           }
         }
       `}</style>

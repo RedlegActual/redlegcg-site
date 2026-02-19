@@ -5,28 +5,28 @@ const HomePageSEO: React.FC = () => {
   const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'Scale With Teddy',
-    description: 'Helping expert consultants and agencies scale past $50k/mo with data-driven LinkedIn systems.',
-    url: 'https://scalewithteddy.com',
-    logo: 'https://scalewithteddy.com/Logo/1.png',
+    name: 'Redleg Consulting Group',
+    description: 'Helping expert consultants and agencies scale past $50k/mo with data-driven infrastructure and AI systems.',
+    url: 'https://redlegcg.com',
+    logo: 'https://redlegcg.com/assets/redleg-logo-main.png',
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'Sales'
     },
     sameAs: [
-      'https://www.linkedin.com/company/scalewithteddy',
-      'https://twitter.com/scalewithteddy'
+      'https://www.linkedin.com/company/redleg-consulting-group',
+      'https://twitter.com/redlegcg'
     ]
   };
 
   const websiteSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'Scale With Teddy',
-    url: 'https://scalewithteddy.com',
+    name: 'Redleg Consulting Group',
+    url: 'https://redlegcg.com',
     potentialAction: {
       '@type': 'SearchAction',
-      target: 'https://scalewithteddy.com/blog?search={search_term_string}',
+      target: 'https://redlegcg.com/blog?search={search_term_string}',
       'query-input': 'required name=search_term_string'
     }
   };
@@ -39,7 +39,7 @@ const HomePageSEO: React.FC = () => {
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        item: 'https://scalewithteddy.com'
+        item: 'https://redlegcg.com'
       }
     ]
   };
@@ -52,8 +52,8 @@ const HomePageSEO: React.FC = () => {
 
   return (
     <SEO
-      title="Scale Your Business with LinkedIn"
-      description="Ready to get 5 clients from LinkedIn in 30 days? If you're making $50k/mo+ online and want a hands-off LinkedIn revenue stream, we'll show you exactly how much profit you're leaving on the table."
+      title="Websites & Systems"
+      description="Veteran-led web design and systems consulting. We build structured, high-performance websites and scalable automation that help businesses grow clearly and confidently."
       structuredData={structuredData}
     />
   );

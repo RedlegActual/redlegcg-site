@@ -11,6 +11,10 @@ import Footer from './components/Footer';
 import BlogPage from './components/BlogPage';
 import ArticlePage from './components/ArticlePage';
 import HomePageSEO from './components/HomePageSEO';
+import RepTallyPrivacy from './components/RepTallyPrivacy';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import TermsOfService from './components/TermsOfService';
+import PortfolioPage from './components/PortfolioPage';
 
 const HomePage: React.FC = () => {
   return (
@@ -33,6 +37,10 @@ const App: React.FC = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/blog/:slug" element={<ArticlePage />} />
+        <Route path="/portfolio" element={<PortfolioPage />} />
+        <Route path="/reptally/privacy" element={<RepTallyPrivacy />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/terms" element={<TermsOfService />} />
       </Routes>
       <Footer />
     </div>
