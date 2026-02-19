@@ -134,33 +134,33 @@ const Hero: React.FC = () => {
       <div className="absolute bottom-0 inset-x-0 h-[280px] bg-gradient-to-t from-black to-transparent pointer-events-none z-0" />
 
       {/* Logo */}
-      <div className="mb-20 relative z-10 mt-4 flex flex-col items-center">
-        <h2 className="text-red-500 font-extrabold text-5xl md:text-6xl tracking-tight leading-none">
+      <div className="mb-12 md:mb-20 relative z-10 mt-4 flex flex-col items-center">
+        <h2 className="text-red-500 font-extrabold text-4xl md:text-6xl tracking-tight leading-none">
           REDLEG
         </h2>
-        <span className="text-white font-semibold tracking-[0.15em] text-lg md:text-xl mt-1 md:mt-2">
+        <span className="text-white font-semibold tracking-[0.15em] text-sm md:text-xl mt-1 md:mt-2">
           CONSULTING GROUP
         </span>
       </div>
 
       {/* Headlines */}
-      <div className="text-center max-w-5xl px-6 relative z-10 transition-all duration-1000">
+      <div className="text-center max-w-5xl px-4 md:px-6 relative z-10 transition-all duration-1000 w-full">
 
-        <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8 opacity-0 animate-[fadeInUp_1s_ease-out_0.2s_forwards] leading-[1.1]">
-          <span className="text-white">Websites Built With Precision.</span><br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-red-300 to-red-500 animate-gradient-x">Designed For Growth.</span>
+        <h1 className="text-[clamp(2.5rem,8vw,4.5rem)] md:text-7xl font-bold tracking-tight mb-6 md:mb-8 opacity-0 animate-[fadeInUp_1s_ease-out_0.2s_forwards] leading-[1.1] md:leading-[1.1] px-2">
+          <span className="text-white block md:inline">Websites Built With Precision.</span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-red-300 to-red-500 animate-gradient-x block md:inline md:ml-3">Designed For Growth.</span>
         </h1>
 
-        <p className="text-gray-400 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-12 opacity-0 animate-[fadeInUp_1s_ease-out_0.4s_forwards] font-light">
+        <p className="text-gray-400 text-base md:text-xl leading-relaxed max-w-2xl mx-auto mb-8 md:mb-12 opacity-0 animate-[fadeInUp_1s_ease-out_0.4s_forwards] font-light px-4">
           Veteran-led web design and systems consulting<br className="hidden md:block" /> so your business runs clearly and confidently.
         </p>
 
         {/* Hero Dashboard Graphic (Reduced Size) */}
-        <div className="relative z-10 w-full max-w-3xl mx-auto mb-0 opacity-0 animate-[fadeInUp_1s_ease-out_0.5s_forwards] scale-90 origin-top">
+        <div className="relative z-10 w-full max-w-3xl mx-auto mb-8 md:mb-0 opacity-0 animate-[fadeInUp_1s_ease-out_0.5s_forwards] scale-[0.85] md:scale-90 origin-top">
           <div className="absolute inset-0 bg-red-900/10 blur-[80px] rounded-full" />
 
           {/* Main Dashboard Glass Panel */}
-          <div className="glass-panel w-full aspect-[16/9] md:aspect-[21/9] rounded-3xl border border-white/10 relative z-10 overflow-hidden flex flex-col shadow-2xl group hover:border-white/20 transition-all duration-500">
+          <div className="glass-panel w-full aspect-[16/9] md:aspect-[21/9] rounded-3xl border border-white/10 relative z-10 overflow-hidden flex flex-col shadow-2xl group hover:border-white/20 transition-all duration-500 bg-black/40 backdrop-blur-md">
 
             {/* Dashboard Header */}
             <div className="h-10 border-b border-white/10 flex items-center justify-between px-6 bg-white/5">
@@ -171,12 +171,13 @@ const Hero: React.FC = () => {
               </div>
               <div className="text-[10px] font-mono text-gray-400 flex items-center gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                System Status: Active
+                <span className="hidden xs:inline">System Status: Active</span>
+                <span className="xs:hidden">Active</span>
               </div>
             </div>
 
             {/* Dashboard Content */}
-            <div className="flex-1 p-6 flex gap-6 relative">
+            <div className="flex-1 p-4 md:p-6 flex gap-6 relative">
               {/* Background Grid */}
               <div className="absolute inset-0 opacity-10 pointer-events-none"
                 style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)', backgroundSize: '30px 30px' }}
@@ -212,24 +213,24 @@ const Hero: React.FC = () => {
               </div>
 
               {/* Right Column: Stack & Highlights */}
-              <div className="flex-1 flex flex-col z-10 gap-4">
+              <div className="flex-1 flex flex-col z-10 gap-3 md:gap-4">
                 {/* Stack Row */}
-                <div className="grid grid-cols-3 gap-3">
-                  <div className="bg-white/5 rounded-xl p-3 border border-white/5 hover:border-white/10 transition-colors flex flex-col items-center text-center justify-center h-full">
-                    <div className="text-gray-400 text-[10px] uppercase tracking-wider">WEBSITES</div>
-                    <div className="text-sm font-bold text-white mt-0.5">Fast</div>
-                    <div className="text-green-400 text-[10px] mt-0.5 flex items-center justify-center gap-1">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                  <div className="bg-white/5 rounded-xl p-2 md:p-3 border border-white/5 hover:border-white/10 transition-colors flex flex-col items-center text-center justify-center h-full">
+                    <div className="text-gray-400 text-[8px] md:text-[10px] uppercase tracking-wider">WEBSITES</div>
+                    <div className="text-xs md:text-sm font-bold text-white mt-0.5">Fast</div>
+                    <div className="text-green-400 text-[8px] md:text-[10px] mt-0.5 flex items-center justify-center gap-1">
                       Built for real users
                     </div>
                   </div>
-                  <div className="bg-white/5 rounded-xl p-3 border border-white/5 hover:border-white/10 transition-colors flex flex-col items-center text-center justify-center h-full">
-                    <div className="text-gray-400 text-[10px] uppercase tracking-wider">SYSTEMS</div>
-                    <div className="text-sm font-bold text-white mt-0.5">Clean</div>
-                    <div className="text-green-400 text-[10px] mt-0.5 flex items-center justify-center gap-1">
+                  <div className="bg-white/5 rounded-xl p-2 md:p-3 border border-white/5 hover:border-white/10 transition-colors flex flex-col items-center text-center justify-center h-full">
+                    <div className="text-gray-400 text-[8px] md:text-[10px] uppercase tracking-wider">SYSTEMS</div>
+                    <div className="text-xs md:text-sm font-bold text-white mt-0.5">Clean</div>
+                    <div className="text-green-400 text-[8px] md:text-[10px] mt-0.5 flex items-center justify-center gap-1">
                       Simple to run
                     </div>
                   </div>
-                  <div className="bg-white/5 rounded-xl p-3 border border-white/5 hidden sm:flex flex-col items-center text-center hover:border-white/10 transition-colors justify-center h-full">
+                  <div className="bg-white/5 rounded-xl p-3 border border-white/5 hidden md:flex flex-col items-center text-center hover:border-white/10 transition-colors justify-center h-full">
                     <div className="text-gray-400 text-[10px] uppercase tracking-wider">AUTOMATION</div>
                     <div className="text-sm font-bold text-white mt-0.5">Practical</div>
                     <div className="text-green-400 text-[10px] mt-0.5 flex items-center justify-center gap-1">
@@ -239,15 +240,15 @@ const Hero: React.FC = () => {
                 </div>
 
                 {/* Highlight Panel */}
-                <div className="flex-1 bg-white/5 rounded-2xl border border-white/10 relative overflow-hidden flex flex-col group/chart hover:border-white/20 transition-all justify-center items-center p-4">
+                <div className="flex-1 bg-white/5 rounded-2xl border border-white/10 relative overflow-hidden flex flex-col group/chart hover:border-white/20 transition-all justify-center items-center p-3 md:p-4 min-h-[80px]">
                   <div className="text-center space-y-1 z-10">
-                    <h3 className="text-2xl font-bold text-white tracking-widest leading-none">Built around your business.</h3>
-                    <div className="flex items-center justify-center gap-2 text-xs text-gray-400 uppercase tracking-widest pt-1">
+                    <h3 className="text-lg md:text-2xl font-bold text-white tracking-widest leading-none">Built around your business.</h3>
+                    <div className="flex items-center justify-center gap-2 text-[10px] md:text-xs text-gray-400 uppercase tracking-widest pt-1 flex-wrap">
                       <span>Understand</span>
                       <span className="text-red-500">→</span>
                       <span>Build</span>
-                      <span className="text-red-500">→</span>
-                      <span>Improve</span>
+                      <span className="text-red-500 hidden sm:inline">→</span>
+                      <span className="hidden sm:inline">Improve</span>
                     </div>
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-red-900/10 to-transparent"></div>
@@ -259,7 +260,7 @@ const Hero: React.FC = () => {
         </div>
 
         {/* CTA Button */}
-        <div className="opacity-0 animate-[fadeInUp_1s_ease-out_0.6s_forwards] relative group mt-8 inline-flex justify-center items-center">
+        <div className="opacity-0 animate-[fadeInUp_1s_ease-out_0.6s_forwards] relative group mt-4 md:mt-8 inline-flex justify-center items-center pb-8 md:pb-0">
           {/* Animated Glow Ring */}
           <div className="absolute -inset-1 bg-gradient-to-r from-red-500 via-red-800 to-red-500 rounded-xl blur opacity-60 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
 
