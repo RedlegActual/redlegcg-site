@@ -6,10 +6,10 @@ const ValueProps: React.FC = () => {
       {/* Background Gradient Line */}
       <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-red-900/40 to-transparent hidden md:block" />
 
-      <div className="max-w-7xl mx-auto px-6 space-y-32 py-32 relative z-10">
+      <div className="max-w-7xl mx-auto px-6 space-y-20 md:space-y-32 py-20 md:py-32 relative z-10">
 
         {/* Section 1: Consult - Expose Structural Gaps */}
-        <div className="grid md:grid-cols-2 gap-16 items-center">
+        <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
           <div className="order-2 md:order-1 relative">
             <div className="absolute inset-0 bg-red-800/20 blur-[100px] rounded-full" />
             <div className="glass-panel p-8 rounded-3xl border border-white/10 relative z-10 transform hover:scale-[1.02] transition-transform duration-500">
@@ -73,7 +73,7 @@ const ValueProps: React.FC = () => {
         </div>
 
         {/* Section 2: Scale - Scale Without Hiring */}
-        <div className="grid md:grid-cols-2 gap-16 items-center">
+        <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
           <div className="space-y-6">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-300 text-xs font-bold uppercase tracking-wider">
               02. Build Stability
@@ -134,7 +134,7 @@ const ValueProps: React.FC = () => {
         </div>
 
         {/* Section 3: Deployment - Custom Systems Architecture */}
-        <div className="grid md:grid-cols-2 gap-16 items-center">
+        <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
           <div className="order-2 md:order-1 relative">
             <div className="absolute inset-0 bg-red-900/20 blur-[100px] rounded-full" />
             <div className="glass-panel p-8 rounded-3xl border border-white/10 relative z-10 transform hover:scale-[1.02] transition-transform duration-500">

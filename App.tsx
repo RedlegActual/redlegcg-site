@@ -30,20 +30,31 @@ const HomePage: React.FC = () => {
   );
 };
 
+import AmbientBackground from './components/AmbientBackground';
+import { useLocation } from 'react-router-dom';
+
+// ... imports ...
+
 const App: React.FC = () => {
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
+
   return (
-    <div className="min-h-screen">
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/blog" element={<BlogPage />} />
-        <Route path="/blog/:slug" element={<ArticlePage />} />
-        <Route path="/portfolio" element={<PortfolioPage />} />
-        <Route path="/reptally/privacy" element={<RepTallyPrivacy />} />
-        <Route path="/privacy" element={<PrivacyPolicy />} />
-        <Route path="/terms" element={<TermsOfService />} />
-      </Routes>
-      <Footer />
-    </div>
+    <>
+      <AmbientBackground startBelowHero={isHomePage} />
+      <div className="min-h-screen relative z-10">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/blog/:slug" element={<ArticlePage />} />
+          <Route path="/portfolio" element={<PortfolioPage />} />
+          <Route path="/reptally/privacy" element={<RepTallyPrivacy />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<TermsOfService />} />
+        </Routes>
+        <Footer />
+      </div>
+    </>
   );
 };
 

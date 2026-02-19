@@ -4,14 +4,14 @@ const Testimonials: React.FC = () => {
 
 
   return (
-    <section className="py-32 relative">
+    <section className="py-20 md:py-32 relative">
       {/* Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-red-900/10 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
 
         {/* About Section - Split Layout */}
-        <div className="grid md:grid-cols-2 gap-16 items-center">
+        <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
           {/* Left Side: Photo */}
           <div className="relative group">
             <div className="absolute inset-0 bg-red-800/20 blur-[60px] rounded-full" />

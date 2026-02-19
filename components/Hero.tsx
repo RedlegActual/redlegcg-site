@@ -147,9 +147,9 @@ const Hero: React.FC = () => {
       {/* Headlines */}
       <div className="text-center max-w-5xl px-4 md:px-6 relative z-10 transition-all duration-1000 w-full flex flex-col items-center mx-auto">
 
-        <h1 className="text-[clamp(1.7rem,6.8vw,4.5rem)] xs:text-[clamp(2.1rem,7.2vw,4.5rem)] md:text-7xl font-bold tracking-tight mb-6 md:mb-8 opacity-0 animate-[fadeInUp_1s_ease-out_0.2s_forwards] leading-[1.1] md:leading-[1.1] px-2 text-center mx-auto [text-wrap:balance]">
-          <span className="text-white block whitespace-nowrap">Websites Built With Precision.</span>
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-red-300 to-red-500 animate-gradient-x block">Designed For Growth.</span>
+        <h1 className="text-[clamp(1.7rem,6.8vw,4.5rem)] xs:text-[clamp(2.1rem,7.2vw,4.5rem)] md:text-5xl lg:text-7xl font-bold tracking-tight mb-6 md:mb-8 opacity-0 animate-[fadeInUp_1s_ease-out_0.2s_forwards] leading-snug md:leading-snug px-2 text-center mx-auto [text-wrap:balance]">
+          <span className="text-white block whitespace-nowrap md:whitespace-normal lg:whitespace-nowrap">Websites Built With Precision.</span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-red-300 to-red-500 animate-gradient-x block pb-2">Designed For Growth.</span>
         </h1>
 
         <p className="text-gray-400 text-base md:text-xl leading-relaxed max-w-2xl mx-auto mb-8 md:mb-12 opacity-0 animate-[fadeInUp_1s_ease-out_0.4s_forwards] font-light px-4 text-center">
@@ -261,12 +261,12 @@ const Hero: React.FC = () => {
         </div>
 
         {/* CTA Button */}
-        <div className="opacity-0 animate-[fadeInUp_1s_ease-out_0.6s_forwards] relative group mt-4 md:mt-8 inline-flex justify-center items-center pb-8 md:pb-0">
-          {/* Animated Glow Ring */}
-          <div className="absolute -inset-1 bg-gradient-to-r from-red-500 via-red-800 to-red-500 rounded-xl hidden md:block blur md:blur opacity-30 md:opacity-60 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
+        <div className="opacity-0 animate-[fadeInUp_1s_ease-out_0.6s_forwards] relative group mt-4 md:mt-8 inline-flex justify-center items-center w-fit mx-auto pb-8 md:pb-0">
+          {/* Animated Glow Ring - Desktop Only */}
+          <div className="absolute -inset-1 bg-gradient-to-r from-red-500 via-red-800 to-red-500 rounded-xl blur opacity-60 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt hidden md:block"></div>
 
-          {/* Cosmic red glow behind button */}
-          <div className="absolute inset-0 z-0 pointer-events-none transition-opacity duration-500 group-hover:opacity-100 hidden md:block opacity-30 md:opacity-60 rounded-xl overflow-hidden">
+          {/* Cosmic red glow - Desktop Only */}
+          <div className="absolute inset-0 z-0 pointer-events-none transition-opacity duration-500 group-hover:opacity-100 opacity-60 rounded-xl overflow-hidden hidden md:block">
             <div className="absolute inset-0 animate-[cosmicShift_14s_ease-in-out_infinite]"
               style={{
                 background: 'radial-gradient(circle at 50% 50%, rgba(185, 28, 28, 0.4) 0%, transparent 60%)',
@@ -276,7 +276,7 @@ const Hero: React.FC = () => {
 
           <button
             onClick={() => document.getElementById('booking-section')?.scrollIntoView({ behavior: 'smooth' })}
-            className="relative z-10 flex items-center gap-2 bg-white text-black px-6 py-3 md:px-8 md:py-3.5 text-base font-bold hover:bg-gray-100 transition-all rounded-xl cursor-pointer hover:shadow-[0_0_10px_rgba(255,255,255,0.2)] md:hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] hover:scale-[1.02] active:scale-[0.98] group/btn"
+            className="relative z-10 flex items-center gap-2 bg-white text-black px-6 py-3 md:px-8 md:py-3.5 text-base font-bold md:hover:bg-gray-100 transition-all rounded-full md:rounded-xl cursor-pointer shadow-[0_0_18px_rgba(220,38,38,0.24)] md:shadow-none hover:shadow-none md:hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] md:hover:scale-[1.02] active:shadow-[0_0_26px_rgba(220,38,38,0.30)] active:scale-[0.99] md:active:scale-[0.98] group/btn"
           >
             Let’s Build
           </button>

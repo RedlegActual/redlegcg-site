@@ -53,7 +53,7 @@ const ContactForm: React.FC = () => {
   };
 
   return (
-    <section id="booking-section" className="py-24 relative overflow-hidden">
+    <section id="booking-section" className="py-20 md:py-24 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-red-900/5 pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-red-600/10 blur-[100px] rounded-full pointer-events-none" />
