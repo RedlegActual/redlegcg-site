@@ -10,14 +10,14 @@ const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
           <div className="space-y-6">
-            <div className="flex flex-col items-center sm:items-start">
+            <a href="/" className="flex flex-col items-center sm:items-start group/logo hover:opacity-80 transition-opacity">
               <h2 className="text-red-500 font-extrabold text-2xl tracking-tight leading-none">
                 REDLEG
               </h2>
               <span className="text-white font-semibold tracking-[0.15em] text-[0.6rem] mt-1">
                 CONSULTING GROUP
               </span>
-            </div>
+            </a>
             <p className="text-gray-400 max-w-sm text-center sm:text-left">
               Clear systems. Built for long-term growth.
             </p>
@@ -48,7 +48,8 @@ const Footer: React.FC = () => {
             <a href="/portfolio" className="hover:text-white transition-colors">Portfolio</a>
             <a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a>
             <a href="/terms" className="hover:text-white transition-colors">Terms of Service</a>
-            <a href="/reptally/privacy" className="hover:text-white transition-colors">RepTally Privacy Policy</a>
+            {/* RepTally Link */}
+            <a href="/reptally" className="hover:text-white transition-colors">RepTally</a>
           </div>
         </div>
       </div>

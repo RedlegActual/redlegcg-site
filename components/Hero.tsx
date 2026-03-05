@@ -97,7 +97,7 @@ const Hero: React.FC = () => {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-screen flex flex-col items-center justify-center pt-4 pb-20 overflow-hidden bg-black group/hero"
+      className="relative min-h-screen flex flex-col items-center justify-center pt-4 pb-[calc(5rem+env(safe-area-inset-bottom))] md:pb-20 overflow-hidden bg-black group/hero"
       style={{
         // Default values to prevent layout shift before JS loads or if mouse hasn't moved
         '--hero-mask-x': '50%',
@@ -135,14 +135,14 @@ const Hero: React.FC = () => {
       <div className="absolute bottom-0 inset-x-0 h-[280px] bg-gradient-to-t from-black to-transparent pointer-events-none z-0" />
 
       {/* Logo */}
-      <div className="mb-12 md:mb-20 relative z-10 mt-4 flex flex-col items-center text-center">
+      <a href="/" className="mb-12 md:mb-20 relative z-10 mt-4 flex flex-col items-center text-center group/logo hover:opacity-80 transition-opacity">
         <h2 className="text-red-500 font-extrabold text-4xl md:text-6xl tracking-tight leading-none">
           REDLEG
         </h2>
         <span className="text-white font-semibold tracking-[0.15em] text-sm md:text-xl mt-1 md:mt-2">
           CONSULTING GROUP
         </span>
-      </div>
+      </a>
 
       {/* Headlines */}
       <div className="text-center max-w-5xl px-4 md:px-6 relative z-10 transition-all duration-1000 w-full flex flex-col items-center mx-auto">
@@ -187,8 +187,8 @@ const Hero: React.FC = () => {
               {/* Left Column: Founder Block */}
               <div className="flex flex-col gap-3 md:gap-4 w-full md:w-56 z-10 shrink-0">
                 {/* Profile Card */}
-                <div className="bg-white/5 rounded-2xl p-3 border border-white/10 flex items-center gap-3 hover:bg-white/10 transition-colors">
-                  <div className="w-10 h-10 rounded-full bg-red-900/20 flex items-center justify-center border border-red-500/20 overflow-hidden flex-shrink-0">
+                <a href="#about" className="bg-white/5 rounded-2xl p-3 border border-white/10 flex items-center gap-3 hover:bg-white/10 hover:border-white/20 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer group/profile">
+                  <div className="w-10 h-10 rounded-full bg-red-900/20 flex items-center justify-center border border-red-500/20 overflow-hidden flex-shrink-0 group-hover/profile:border-red-500/40 transition-colors">
                     <img
                       src="/assets/field-artillery-insignia.png"
                       alt="Redleg Icon"
@@ -199,18 +199,18 @@ const Hero: React.FC = () => {
                     <div className="text-sm font-bold text-white leading-none">Cody Lancaster</div>
                     <div className="text-[10px] font-medium text-red-400/90 mt-1">Redleg Consulting Group</div>
                   </div>
-                </div>
+                </a>
 
                 {/* Status Box */}
-                <div className="bg-neutral-900/50 rounded-2xl p-4 border border-white/10 flex flex-col h-full group/status hover:bg-white/5 transition-all relative overflow-hidden justify-center items-center text-center">
+                <a href="#booking-section" className="bg-neutral-900/50 rounded-2xl p-4 border border-white/10 flex flex-col h-full group/status hover:bg-white/5 hover:border-white/20 hover:scale-[1.02] active:scale-[0.98] transition-all relative overflow-hidden justify-center items-center text-center cursor-pointer">
                   <div className="flex flex-col gap-0.5 z-10 w-full">
                     <span className="text-[10px] text-gray-500 uppercase tracking-wider mb-2">Availability</span>
                     <div className="text-xl font-bold text-white leading-none">Open</div>
-                    <div className="text-[10px] text-green-400 mt-1.5">Currently Booking</div>
+                    <div className="text-[10px] text-green-400 mt-1.5 group-hover/status:text-green-300 transition-colors">Currently Booking</div>
                   </div>
                   {/* Red Glow Background */}
-                  <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-red-900/10 blur-xl rounded-full" />
-                </div>
+                  <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-red-900/10 blur-xl rounded-full group-hover/status:bg-red-900/20 transition-colors" />
+                </a>
               </div>
 
               {/* Right Column: Stack & Highlights */}
@@ -261,7 +261,7 @@ const Hero: React.FC = () => {
         </div>
 
         {/* CTA Button */}
-        <div className="opacity-0 animate-[fadeInUp_1s_ease-out_0.6s_forwards] relative group mt-4 md:mt-8 inline-flex justify-center items-center w-fit mx-auto pb-8 md:pb-0">
+        <div className="opacity-0 animate-[fadeInUp_1s_ease-out_0.6s_forwards] relative group mt-4 md:mt-8 inline-flex justify-center items-center w-fit mx-auto pb-8 md:pb-0 mb-[env(safe-area-inset-bottom)] md:mb-0">
           {/* Animated Glow Ring - Desktop Only */}
           <div className="absolute -inset-1 bg-gradient-to-r from-red-500 via-red-800 to-red-500 rounded-xl blur opacity-60 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt hidden md:block"></div>
 
@@ -275,8 +275,8 @@ const Hero: React.FC = () => {
           </div>
 
           <button
-            onClick={() => document.getElementById('booking-section')?.scrollIntoView({ behavior: 'smooth' })}
-            className="relative z-10 flex items-center gap-2 bg-white text-black px-6 py-3 md:px-8 md:py-3.5 text-base font-bold md:hover:bg-gray-100 transition-all rounded-full md:rounded-xl cursor-pointer shadow-[0_0_18px_rgba(220,38,38,0.24)] md:shadow-none hover:shadow-none md:hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] md:hover:scale-[1.02] active:shadow-[0_0_26px_rgba(220,38,38,0.30)] active:scale-[0.99] md:active:scale-[0.98] group/btn"
+            onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
+            className="relative z-10 flex items-center gap-2 bg-white text-black px-6 py-3 md:px-8 md:py-3.5 text-base font-bold md:hover:bg-gray-100 transition-all rounded-full md:rounded-xl cursor-pointer shadow-[0_0_18px_rgba(185,28,28,0.45)] md:shadow-none hover:shadow-none md:hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] md:hover:scale-[1.02] active:shadow-[0_0_26px_rgba(220,38,38,0.30)] active:scale-[0.99] md:active:scale-[0.98] group/btn"
           >
             Let’s Build
           </button>

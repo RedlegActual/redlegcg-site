@@ -15,6 +15,8 @@ import RepTallyPrivacy from './components/RepTallyPrivacy';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsOfService from './components/TermsOfService';
 import PortfolioPage from './components/PortfolioPage';
+import RepTallyHub from './components/RepTallyHub';
+import RepTallySupport from './components/RepTallySupport';
 
 const HomePage: React.FC = () => {
   return (
@@ -32,6 +34,7 @@ const HomePage: React.FC = () => {
 
 import AmbientBackground from './components/AmbientBackground';
 import { useLocation } from 'react-router-dom';
+import RedlegCommandNode from './components/RedlegCommandNode';
 
 // ... imports ...
 
@@ -48,12 +51,15 @@ const App: React.FC = () => {
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog/:slug" element={<ArticlePage />} />
           <Route path="/portfolio" element={<PortfolioPage />} />
+          <Route path="/reptally" element={<RepTallyHub />} />
           <Route path="/reptally/privacy" element={<RepTallyPrivacy />} />
+          <Route path="/reptally/support" element={<RepTallySupport />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<TermsOfService />} />
         </Routes>
         <Footer />
       </div>
+      <RedlegCommandNode />
     </>
   );
 };

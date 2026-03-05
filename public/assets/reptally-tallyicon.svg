@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-label="RepTally icon">
+  <title>RepTally Icon</title>
+
+  <!--
+    Notes:
+    - Transparent background (no black box).
+    - White bars use currentColor so you can control them with CSS.
+    - Red slash uses a CSS variable with a fallback.
+  -->
+
+  <defs>
+    <style>
+      .bars { fill: currentColor; }
+      .slash { fill: var(--reptally-red, #c30000); }
+    </style>
+  </defs>
+
+  <!-- Layout parameters (simple, consistent grid) -->
+  <!-- Group size ~360x360 with spacing -->
+  <!-- Top-left origin and offsets -->
+  <!-- Each group: 4 vertical bars + diagonal slash -->
+
+  <!-- ===== Group helper: x,y offsets ===== -->
+  <!-- GROUP 1 (top-left) -->
+  <g transform="translate(170,170)">
+    <rect class="bars" x="40" y="60" width="40" height="220" rx="12"></rect>
+    <rect class="bars" x="105" y="60" width="40" height="220" rx="12"></rect>
+    <rect class="bars" x="170" y="60" width="40" height="220" rx="12"></rect>
+    <rect class="bars" x="235" y="60" width="40" height="220" rx="12"></rect>
+    <rect class="slash" x="20" y="140" width="320" height="40" rx="10" transform="rotate(-20 180 160)"></rect>
+  </g>
+
+  <!-- GROUP 2 (top-right) -->
+  <g transform="translate(494,170)">
+    <rect class="bars" x="40" y="60" width="40" height="220" rx="12"></rect>
+    <rect class="bars" x="105" y="60" width="40" height="220" rx="12"></rect>
+    <rect class="bars" x="170" y="60" width="40" height="220" rx="12"></rect>
+    <rect class="bars" x="235" y="60" width="40" height="220" rx="12"></rect>
+    <rect class="slash" x="20" y="140" width="320" height="40" rx="10" transform="rotate(-20 180 160)"></rect>
+  </g>
+
+  <!-- GROUP 3 (bottom-left) -->
+  <g transform="translate(170,494)">
+    <rect class="bars" x="40" y="60" width="40" height="220" rx="12"></rect>
+    <rect class="bars" x="105" y="60" width="40" height="220" rx="12"></rect>
+    <rect class="bars" x="170" y="60" width="40" height="220" rx="12"></rect>
+    <rect class="bars" x="235" y="60" width="40" height="220" rx="12"></rect>
+    <rect class="slash" x="20" y="140" width="320" height="40" rx="10" transform="rotate(-20 180 160)"></rect>
+  </g>
+
+  <!-- GROUP 4 (bottom-right) -->
+  <g transform="translate(494,494)">
+    <rect class="bars" x="40" y="60" width="40" height="220" rx="12"></rect>
+    <rect class="bars" x="105" y="60" width="40" height="220" rx="12"></rect>
+    <rect class="bars" x="170" y="60" width="40" height="220" rx="12"></rect>
+    <rect class="bars" x="235" y="60" width="40" height="220" rx="12"></rect>
+    <rect class="slash" x="20" y="140" width="320" height="40" rx="10" transform="rotate(-20 180 160)"></rect>
+  </g>
+</svg>

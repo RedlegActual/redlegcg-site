@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1200" role="img" aria-label="RepTally logo lockup">
+  <title>RepTally Logo</title>
+
+  <defs>
+    <style>
+      .bars { fill: currentColor; }
+      .slash { fill: var(--reptally-red, #c30000); }
+      text {
+        font-family: Georgia, "Times New Roman", Times, serif;
+        font-weight: 700;
+        letter-spacing: -1px;
+      }
+      .r { fill: var(--reptally-red, #c30000); }
+      .rest { fill: currentColor; }
+    </style>
+  </defs>
+
+  <!-- Tally icon (same as above, centered) -->
+  <g transform="translate(0,0)">
+    <g transform="translate(170,170)">
+      <rect class="bars" x="40" y="60" width="40" height="220" rx="12"></rect>
+      <rect class="bars" x="105" y="60" width="40" height="220" rx="12"></rect>
+      <rect class="bars" x="170" y="60" width="40" height="220" rx="12"></rect>
+      <rect class="bars" x="235" y="60" width="40" height="220" rx="12"></rect>
+      <rect class="slash" x="20" y="140" width="320" height="40" rx="10" transform="rotate(-20 180 160)"></rect>
+    </g>
+
+    <g transform="translate(494,170)">
+      <rect class="bars" x="40" y="60" width="40" height="220" rx="12"></rect>
+      <rect class="bars" x="105" y="60" width="40" height="220" rx="12"></rect>
+      <rect class="bars" x="170" y="60" width="40" height="220" rx="12"></rect>
+      <rect class="bars" x="235" y="60" width="40" height="220" rx="12"></rect>
+      <rect class="slash" x="20" y="140" width="320" height="40" rx="10" transform="rotate(-20 180 160)"></rect>
+    </g>
+
+    <g transform="translate(170,494)">
+      <rect class="bars" x="40" y="60" width="40" height="220" rx="12"></rect>
+      <rect class="bars" x="105" y="60" width="40" height="220" rx="12"></rect>
+      <rect class="bars" x="170" y="60" width="40" height="220" rx="12"></rect>
+      <rect class="bars" x="235" y="60" width="40" height="220" rx="12"></rect>
+      <rect class="slash" x="20" y="140" width="320" height="40" rx="10" transform="rotate(-20 180 160)"></rect>
+    </g>
+
+    <g transform="translate(494,494)">
+      <rect class="bars" x="40" y="60" width="40" height="220" rx="12"></rect>
+      <rect class="bars" x="105" y="60" width="40" height="220" rx="12"></rect>
+      <rect class="bars" x="170" y="60" width="40" height="220" rx="12"></rect>
+      <rect class="bars" x="235" y="60" width="40" height="220" rx="12"></rect>
+      <rect class="slash" x="20" y="140" width="320" height="40" rx="10" transform="rotate(-20 180 160)"></rect>
+    </g>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="190" y="1120" font-size="150">
+    <tspan class="r">R</tspan><tspan class="rest">epTally</tspan>
+  </text>
+</svg>

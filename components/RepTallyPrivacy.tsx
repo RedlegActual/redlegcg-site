@@ -11,7 +11,8 @@ const RepTallyPrivacy: React.FC = () => {
             <div className="max-w-2xl mx-auto px-6">
                 {/* Header */}
                 <div className="mb-16">
-                    <h1 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight">RepTally Privacy Policy</h1>
+                    <img src="/assets/reptally-wordmarked.svg" alt="RepTally" className="h-8 md:h-10 w-auto object-contain mb-6 brightness-0 invert" />
+                    <h1 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight">Privacy Policy</h1>
                     <p className="text-gray-500 text-sm font-medium tracking-wide upppercase">Last updated: February 13, 2026</p>
                 </div>
 
@@ -111,13 +112,8 @@ const RepTallyPrivacy: React.FC = () => {
 
                 {/* Wordmark Footer */}
                 <div className="mt-24 pt-12 border-t border-white/10 flex flex-col items-center text-center">
-                    <Link to="/reptally/privacy" className="group">
-                        <span className="block text-xl font-bold tracking-tight text-white group-hover:text-red-500 transition-colors">
-                            RepTally
-                        </span>
-                        <span className="block text-xs text-gray-500 mt-2 uppercase tracking-[0.2em] group-hover:text-gray-400 transition-colors">
-                            Minimalist Rep Counter
-                        </span>
+                    <Link to="/reptally" className="group flex flex-col items-center">
+                        <img src="/assets/reptally-lockup.svg" alt="RepTally Lockup" className="w-48 h-auto object-contain brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity" />
                     </Link>
 
                     <div className="mt-8 text-xs text-gray-600 space-y-2">
