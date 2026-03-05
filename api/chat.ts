@@ -62,8 +62,8 @@ Do NOT mix questions from the different sequences. Ask ONE question at a time.
 Once the user explicitly confirms the summary at the final step of ANY path, you MUST end your final message with the exact text: [ACTION: SEND_EMAIL_BRIEF]
 `;
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY }); // Uses OPENAI_API_KEY securely from backend
+let resend: Resend | null = null;
+let openai: OpenAI | null = null;
 
 export default async function handler(
     request: VercelRequest,
@@ -74,12 +74,26 @@ export default async function handler(
     }
 
     try {
+        // 1. Validate API Keys safely inside the request handler
+        if (!process.env.OPENAI_API_KEY) {
+            return response.status(500).json({ error: 'DIAGNOSTIC: OPENAI_API_KEY is missing in Vercel. Please check your Vercel Environment Variables.' });
+        }
+
+        if (!openai) {
+            openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+        }
+        if (!resend && process.env.RESEND_API_KEY) {
+            resend = new Resend(process.env.RESEND_API_KEY);
+        }
+
+        // 2. Process payload
         const { chatHistory, fileData } = request.body;
 
         if (!chatHistory || !Array.isArray(chatHistory)) {
-            return response.status(400).json({ error: 'Invalid chat history' });
+            return response.status(400).json({ error: 'Invalid chat history payload' });
         }
 
+        // 3. Ping OpenAI
         const aiResponse = await openai.chat.completions.create({
             model: "gpt-4o-mini",
             messages: [
@@ -93,14 +107,12 @@ export default async function handler(
         let reply = aiResponse.choices[0].message.content || "";
         const triggerTag = "[ACTION: SEND_EMAIL_BRIEF]";
 
-        // Check if the AI wants to trigger the email
+        // 4. Handle Trigger Logic
         if (reply.includes(triggerTag)) {
-            // Strip the trigger tag from the message shown to the user
             reply = reply.replace(triggerTag, "").trim();
 
             const attachments = [];
             if (fileData && fileData.base64) {
-                // Ensure base64 string doesn't include the data:image/png;base64, prefix if standard format
                 const base64Content = fileData.base64.split(',').pop() || fileData.base64;
                 attachments.push({
                     filename: fileData.name || 'attachment.png',
@@ -108,24 +120,24 @@ export default async function handler(
                 });
             }
 
-            // Send Email
-            await resend.emails.send({
-                from: process.env.CONTACT_FROM_EMAIL || 'onboarding@resend.dev',
-                to: process.env.CONTACT_TO_EMAIL || 'contact@redlegcg.com',
-                subject: '🔥 NEW AI INTAKE BRIEF: Redleg Command Node',
-                html: `
-                    <h2>New AI-Generated Lead Brief</h2>
-                    <p>The Redleg Command Node successfully captured and refined a new brief. See details below:</p>
-                    <hr/>
-                    <div style="white-space: pre-wrap; font-family: monospace; background: #f4f4f4; padding: 15px; border-radius: 5px;">
-                        ${reply}
-                    </div>
-                `,
-                attachments: attachments
-            });
-
-            // Optionally, we could change the reply text here entirely, 
-            // but returning the AI's polite sign-off is usually best.
+            if (resend) {
+                await resend.emails.send({
+                    from: process.env.CONTACT_FROM_EMAIL || 'onboarding@resend.dev',
+                    to: process.env.CONTACT_TO_EMAIL || 'contact@redlegcg.com',
+                    subject: '🔥 NEW AI INTAKE BRIEF: Redleg Command Node',
+                    html: `
+                        <h2>New AI-Generated Lead Brief</h2>
+                        <p>The Redleg Command Node successfully captured and refined a new brief. See details below:</p>
+                        <hr/>
+                        <div style="white-space: pre-wrap; font-family: monospace; background: #f4f4f4; padding: 15px; border-radius: 5px;">
+                            ${reply}
+                        </div>
+                    `,
+                    attachments: attachments
+                });
+            } else {
+                console.error("Resend API Key missing. Skipping email transmission.");
+            }
         }
 
         return response.status(200).json({ reply });
@@ -135,4 +147,3 @@ export default async function handler(
         return response.status(500).json({ error: error.message || 'Internal Server Error' });
     }
 }
-
