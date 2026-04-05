@@ -1,66 +1,41 @@
-
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Hero from './components/Hero';
-import Brands from './components/Brands';
-import ValueProps from './components/ValueProps';
-import Testimonials from './components/Testimonials';
-import ContactForm from './components/ContactForm';
-import BookingCalendar from './components/BookingCalendar';
-import Footer from './components/Footer';
-import BlogPage from './components/BlogPage';
-import ArticlePage from './components/ArticlePage';
-import HomePageSEO from './components/HomePageSEO';
-import RepTallyPrivacy from './components/RepTallyPrivacy';
-import PrivacyPolicy from './components/PrivacyPolicy';
-import TermsOfService from './components/TermsOfService';
-import PortfolioPage from './components/PortfolioPage';
-import RepTallyHub from './components/RepTallyHub';
-import RepTallySupport from './components/RepTallySupport';
-
-const HomePage: React.FC = () => {
-  return (
-    <>
-      <HomePageSEO />
-      <Hero />
-      <Brands />
-      <ValueProps />
-      <Testimonials />
-      <ContactForm />
-      <BookingCalendar />
-    </>
-  );
-};
-
-import AmbientBackground from './components/AmbientBackground';
-import { useLocation } from 'react-router-dom';
-import RedlegCommandNode from './components/RedlegCommandNode';
-
-// ... imports ...
 
 const App: React.FC = () => {
-  const location = useLocation();
-  const isHomePage = location.pathname === '/';
-
   return (
-    <>
-      <AmbientBackground startBelowHero={isHomePage} />
-      <div className="min-h-screen relative z-10">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/blog" element={<BlogPage />} />
-          <Route path="/blog/:slug" element={<ArticlePage />} />
-          <Route path="/portfolio" element={<PortfolioPage />} />
-          <Route path="/reptally" element={<RepTallyHub />} />
-          <Route path="/reptally/privacy" element={<RepTallyPrivacy />} />
-          <Route path="/reptally/support" element={<RepTallySupport />} />
-          <Route path="/privacy" element={<PrivacyPolicy />} />
-          <Route path="/terms" element={<TermsOfService />} />
-        </Routes>
-        <Footer />
+    <div className="min-h-screen bg-[#050505] flex flex-col items-center justify-center text-white relative overflow-hidden font-sans">
+      {/* Dynamic Background Elements */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
+        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-red-900/20 rounded-full blur-[120px] opacity-60 animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-red-700/10 rounded-full blur-[150px] opacity-40"></div>
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150 mix-blend-overlay"></div>
       </div>
-      <RedlegCommandNode />
-    </>
+
+      <div className="z-10 text-center px-6 max-w-2xl mx-auto flex flex-col items-center">
+        {/* Core Content */}
+        <div className="mb-8 p-4 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-sm inline-block shadow-2xl">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-red-500 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+        </div>
+        
+        <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-neutral-500">
+          Under Maintenance
+        </h1>
+        
+        <p className="text-lg md:text-xl text-neutral-400 font-light mb-10 leading-relaxed">
+          We are currently performing scheduled maintenance on our system to improve your experience. 
+          Please check back shortly.
+        </p>
+
+        <div className="flex space-x-2 items-center text-sm font-medium text-neutral-500 uppercase tracking-widest bg-neutral-900/50 px-6 py-3 rounded-full border border-white/5 backdrop-blur-md">
+          <span className="relative flex h-2 w-2 mr-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+          </span>
+          System Updating
+        </div>
+      </div>
+    </div>
   );
 };
 
